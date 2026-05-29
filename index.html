@@ -81,6 +81,12 @@
       transition: background .2s ease, color .2s ease;
     }
     .btn-outline:hover { background: #1A1613; color: #fff; }
+
+    /* キーボードフォーカスリング（アクセシビリティ） */
+    a:focus-visible, summary:focus-visible {
+      outline: 2px solid #A87B4B;
+      outline-offset: 4px;
+    }
   </style>
 </head>
 <body>
