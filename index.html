@@ -46,7 +46,11 @@
 
   <style>
     html, body { background: #FBF8F1; color: #1A1613; }
-    body { font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      font-feature-settings: "palt";
+    }
 
     /* ヘアライン */
     .hairline { background: linear-gradient(90deg, transparent, #A87B4B 20%, #A87B4B 80%, transparent); height: 1px; }
@@ -60,14 +64,107 @@
       .reveal { opacity: 1; transform: none; transition: none; }
     }
 
-    /* セクション共通 */
-    .section-wrap { max-width: 920px; margin: 0 auto; padding: 96px 24px; }
+    /* セクション共通 — 章番号の透かしを置けるよう relative + overflow:hidden */
+    .section-wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 96px 24px;
+      position: relative;
+      z-index: 1;
+    }
     @media (min-width: 768px) { .section-wrap { padding: 128px 32px; } }
+    section { position: relative; overflow: hidden; }
 
-    /* ラベル（small caps風） */
-    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .4em; color: #A87B4B; text-transform: uppercase; }
+    /* ラベル（small caps風） — 編集デザインに寄せる */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .4em;
+      color: #A87B4B;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .eyebrow .roman {
+      font-weight: 400;
+      letter-spacing: .18em;
+      color: rgba(168, 123, 75, 0.7);
+      font-style: italic;
+    }
+    #concept .eyebrow .roman,
+    #contact .eyebrow .roman { color: rgba(201, 160, 99, 0.75); }
+    .eyebrow .sep { display: inline-block; width: 14px; }
+
+    /* HERO の追加 Latin ライン */
+    .prologue {
+      margin-top: 10px;
+      font-size: 10px;
+      letter-spacing: .35em;
+      color: rgba(168, 123, 75, 0.7);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* 章番号 透かし */
+    .chapter-mark {
+      position: absolute;
+      top: 36px;
+      right: 6%;
+      font-size: clamp(120px, 18vw, 220px);
+      font-weight: 100;
+      color: rgba(168, 123, 75, 0.06);
+      letter-spacing: .02em;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      font-style: italic;
+    }
+    #concept .chapter-mark { color: rgba(201, 160, 99, 0.05); }
+    @media (max-width: 640px) {
+      .chapter-mark { top: 24px; right: 4%; opacity: .9; }
+    }
+
+    /* 章のセクションタイトルは透かしより前面に */
+    section h2, section .eyebrow, section h1 { position: relative; z-index: 1; }
+
+    /* 装飾オーナメント（セクション間） */
+    .ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px;
+      max-width: 120px;
+      margin: 0 auto;
+      padding: 32px 0;
+      background: #FBF8F1;
+    }
+    .ornament-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A063 50%, transparent);
+    }
+    .ornament-mark {
+      color: #A87B4B;
+      font-size: 10px;
+      line-height: 1;
+      opacity: .8;
+    }
+    .ornament.on-dark { background: #1A1613; }
+    .ornament.on-dark .ornament-mark { color: #C9A063; }
+    .ornament.on-kinari { background: #F5EFE4; }
+
+    /* セクションタイトル 全体的に少しゆとり */
+    section h2 {
+      letter-spacing: .06em !important;
+      line-height: 1.7 !important;
+    }
 
     /* CTAボタン */
+    .btn-primary, .btn-outline, .btn-gold {
+      position: relative;
+      overflow: hidden;
+    }
     .btn-primary {
       display: inline-flex; align-items: center; justify-content: center;
       background: #1A1613; color: #fff;
@@ -76,16 +173,18 @@
       text-decoration: none;
       transition: background .2s ease, transform .2s ease;
     }
-    .btn-primary:hover { background: #2C2620; transform: translateY(-1px); }
+    .btn-primary:hover, .btn-primary:focus-visible { background: #2C2620; transform: translateY(-1px); }
     .btn-outline {
       display: inline-flex; align-items: center; justify-content: center;
       border: 1px solid #1A1613; color: #1A1613;
       padding: 14px 32px;
       font-size: 13px; font-weight: 500; letter-spacing: .2em;
       text-decoration: none;
-      transition: background .2s ease, color .2s ease;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
     }
-    .btn-outline:hover { background: #1A1613; color: #fff; }
+    .btn-outline:hover, .btn-outline:focus-visible {
+      background: #1A1613; color: #fff; transform: translateY(-1px);
+    }
     .btn-gold {
       display: inline-flex; align-items: center; justify-content: center;
       background: #C9A063; color: #1A1613;
@@ -94,11 +193,75 @@
       text-decoration: none;
       transition: background .2s ease, color .2s ease, transform .2s ease;
     }
-    .btn-gold:hover, .btn-gold:focus-visible { background: #A87B4B; color: #fff; transform: translateY(-1px); }
+    .btn-gold:hover, .btn-gold:focus-visible {
+      background: #A87B4B; color: #fff; transform: translateY(-1px);
+    }
+
+    /* 矢印スライド microinteraction */
+    .arrow-anim {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-primary:hover .arrow-anim,
+    .btn-outline:hover .arrow-anim,
+    .btn-gold:hover .arrow-anim,
+    .showcase-card:hover .arrow-anim,
+    .btn-primary:focus-visible .arrow-anim,
+    .btn-outline:focus-visible .arrow-anim,
+    .btn-gold:focus-visible .arrow-anim {
+      transform: translateX(4px);
+    }
 
     /* SHOWCASEカード */
-    .showcase-card { transition: transform .3s ease, box-shadow .3s ease; }
-    .showcase-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,22,19,0.08); }
+    .showcase-card {
+      transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .5s ease;
+    }
+    .showcase-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 48px -12px rgba(26, 22, 19, 0.14);
+    }
+
+    /* スマホベゼル風フレーム */
+    .phone-bezel {
+      position: relative;
+      border-radius: 14px;
+      border: 1.5px solid #1A1613;
+      padding: 6px;
+      background: #1A1613;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.04),
+        0 1px 0 rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .phone-bezel::before {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 4px;
+      background: #0A0907;
+      border-radius: 3px;
+      z-index: 2;
+    }
+    .phone-bezel .phone-screen {
+      position: relative;
+      aspect-ratio: 9/16;
+      background: #FBF8F1;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-bezel .phone-screen iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      pointer-events: none;
+    }
 
     /* FAQアコーディオン */
     details summary::-webkit-details-marker { display: none; }
@@ -106,28 +269,277 @@
     details summary > span:last-child { display: inline-block; transition: transform .2s ease; }
 
     /* キーボードフォーカスリング（アクセシビリティ） */
-    a:focus-visible, summary:focus-visible {
+    a:focus-visible, summary:focus-visible, button:focus-visible {
       outline: 2px solid #A87B4B;
-      outline-offset: 4px;
+      outline-offset: 6px;
+    }
+
+    /* === Sticky Header === */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(251, 248, 241, 0);
+      backdrop-filter: blur(0);
+      -webkit-backdrop-filter: blur(0);
+      border-bottom: 1px solid transparent;
+      z-index: 50;
+      transition: background .35s ease, backdrop-filter .35s ease, border-color .35s ease, opacity .35s ease, transform .35s ease;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+    .site-header.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      background: rgba(251, 248, 241, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid #D9CFBD;
+    }
+    .site-header .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+      font-size: 12px;
+      letter-spacing: .14em;
+      color: #1A1613;
+      text-decoration: none;
+    }
+    .site-header .brand .brand-lat {
+      font-size: 10px;
+      letter-spacing: .26em;
+      color: #A87B4B;
+      font-weight: 500;
+    }
+    .site-header .brand .brand-sep {
+      color: #A87B4B;
+      margin: 0 10px;
+      opacity: .6;
+    }
+    .site-header .brand .brand-jp {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1A1613;
+      letter-spacing: .12em;
+    }
+    .site-header .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #1A1613;
+      color: #1A1613;
+      text-decoration: none;
+      padding: 7px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      transition: background .2s ease, color .2s ease;
+    }
+    .site-header .nav-cta:hover, .site-header .nav-cta:focus-visible {
+      background: #1A1613; color: #fff;
+    }
+    @media (max-width: 480px) {
+      .site-header .brand .brand-lat { display: none; }
+      .site-header .brand .brand-sep { display: none; }
+    }
+
+    /* === HERO 縦書き Latin サイドラベル === */
+    .hero-side-label {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-size: 10px;
+      letter-spacing: .5em;
+      color: rgba(168, 123, 75, 0.6);
+      font-weight: 500;
+      text-transform: uppercase;
+      pointer-events: none;
+      user-select: none;
+      z-index: 2;
+      white-space: nowrap;
+    }
+    @media (max-width: 767px) { .hero-side-label { display: none; } }
+
+    /* === CONCEPT 装飾 === */
+    .concept-quote-glyph {
+      position: absolute;
+      top: 60px;
+      left: 6%;
+      font-size: clamp(180px, 24vw, 280px);
+      line-height: 1;
+      color: rgba(201, 160, 99, 0.08);
+      font-weight: 300;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    .concept-quote {
+      max-width: 540px;
+      margin: 48px auto 0;
+      font-size: 14px;
+      line-height: 2.6;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.78);
+      font-style: normal;
+      border: 0;
+      padding: 0;
+      quotes: none;
+    }
+    .concept-quote::before, .concept-quote::after { content: none; }
+    .concept-editor-note {
+      margin-top: 28px;
+      font-size: 10px;
+      letter-spacing: .35em;
+      color: rgba(201, 160, 99, 0.55);
+      font-style: italic;
+      text-transform: uppercase;
+    }
+    .concept-emph-underline {
+      position: relative;
+      display: inline-block;
+    }
+    .concept-emph-underline::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -6px;
+      height: 1px;
+      background: #C9A063;
+      opacity: .9;
+    }
+
+    /* === Footer === */
+    .site-footer {
+      background: #0F0D0B;
+      border-top: 1px solid rgba(201, 160, 99, 0.35);
+      color: rgba(255, 255, 255, 0.55);
+      padding: 64px 24px 48px;
+      font-size: 11px;
+      letter-spacing: .1em;
+    }
+    .site-footer .footer-grid {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    @media (min-width: 768px) {
+      .site-footer .footer-grid {
+        grid-template-columns: 1fr 2fr;
+        gap: 64px;
+      }
+    }
+    .site-footer .brand-block .brand-name {
+      font-size: 12px;
+      letter-spacing: .28em;
+      color: #C9A063;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .site-footer .brand-block .brand-tag {
+      font-size: 11px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: .08em;
+    }
+    .site-footer .index-block .index-label {
+      font-size: 10px;
+      letter-spacing: .4em;
+      color: rgba(201, 160, 99, 0.6);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .site-footer .index-block .index-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .site-footer .index-block .index-list a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: .14em;
+      transition: color .2s ease;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .site-footer .index-block .index-list a:hover,
+    .site-footer .index-block .index-list a:focus-visible {
+      color: #C9A063;
+    }
+    .site-footer .index-block .index-list .num {
+      color: rgba(201, 160, 99, 0.7);
+      font-size: 10px;
+      letter-spacing: .2em;
+      font-style: italic;
+    }
+    .site-footer .footer-meta {
+      max-width: 920px;
+      margin: 40px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+    .site-footer .footer-meta a {
+      color: #C9A063;
+      text-decoration: none;
+    }
+    .site-footer .footer-meta a:hover, .site-footer .footer-meta a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
   </style>
   <noscript>
-    <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .site-header { opacity: 1; transform: none; pointer-events: auto; background: rgba(251,248,241,0.92); border-bottom: 1px solid #D9CFBD; }
+    </style>
   </noscript>
 </head>
 <body>
 
-  <!-- Header (Task 12 で実装) -->
+  <!-- === Sticky Header === -->
+  <header class="site-header" id="siteHeader" aria-label="サイトヘッダー">
+    <a href="#hero" class="brand" aria-label="OTA SANPOT / Simple Homepage">
+      <span class="brand-lat">OTA SANPOT</span>
+      <span class="brand-sep">／</span>
+      <span class="brand-jp">Simple Homepage</span>
+    </a>
+    <a href="#contact" class="nav-cta">相談する</a>
+  </header>
 
   <main>
-    <!-- SECTION 01 / HERO (Task 2) -->
+    <!-- SECTION 01 / HERO -->
     <section id="hero" class="bg-paper">
+      <!-- 縦書き Latin サイドラベル -->
+      <div class="hero-side-label" aria-hidden="true">OTA SANPOT　／　SIMPLE HOMEPAGE　／　001</div>
+
       <div class="section-wrap text-center">
-        <p class="eyebrow reveal">OTA SANPOT　／　YOUR DIGITAL STOREFRONT</p>
+        <p class="eyebrow reveal">
+          <span>OTA SANPOT　／　YOUR DIGITAL STOREFRONT</span>
+        </p>
+        <p class="prologue reveal">— I — PROLOGUE</p>
 
         <div class="hairline reveal" style="width:64px;margin:32px auto 40px;"></div>
 
-        <h1 class="reveal" style="font-size:clamp(28px,5vw,46px);font-weight:300;line-height:1.6;letter-spacing:.04em;color:#1A1613;">
+        <h1 class="reveal" style="font-size:clamp(28px,5vw,46px);font-weight:300;line-height:1.6;letter-spacing:.02em;color:#1A1613;">
           お店の<span style="font-weight:500;">"想い"</span>が、<br>ちゃんと届く。
         </h1>
 
@@ -150,18 +562,25 @@
         </div>
 
         <div class="reveal" style="margin-top:40px;">
-          <a href="#contact" class="btn-primary">無料で相談する</a>
+          <a href="#contact" class="btn-primary">無料で相談する<span class="arrow-anim" aria-hidden="true">→</span></a>
         </div>
 
         <p class="reveal" style="margin-top:16px;font-size:11px;color:#A87B4B;letter-spacing:.15em;">お見積もり・ご相談 無料</p>
       </div>
     </section>
-    <!-- SECTION 02 / SHOWCASE (Task 3) -->
+
+    <!-- Ornament: HERO → SHOWCASE -->
+    <div aria-hidden="true" class="ornament">
+      <span class="ornament-line"></span><span class="ornament-mark">✦</span><span class="ornament-line"></span>
+    </div>
+
+    <!-- SECTION 02 / SHOWCASE -->
     <section id="showcase" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
+      <div class="chapter-mark" aria-hidden="true">02</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow">SHOWCASE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">実物を、見てみる。</h2>
+          <p class="eyebrow"><span class="roman">— II —</span><span class="sep"></span>SHOWCASE</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">実物を、見てみる。</h2>
           <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">クリックすると、別タブで実際のページが開きます。</p>
         </div>
 
@@ -169,24 +588,28 @@
 
           <!-- 作例A -->
           <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
-            <div style="aspect-ratio:9/16;background:#FBF8F1;border:1px solid #D9CFBD;display:flex;align-items:center;justify-content:center;margin-bottom:24px;overflow:hidden;">
-              <iframe src="https://ota-sanpot.github.io/sample_store/" style="width:100%;height:100%;border:0;pointer-events:none;" loading="lazy" title="作例A プレビュー"></iframe>
+            <div class="phone-bezel" style="margin-bottom:24px;">
+              <div class="phone-screen">
+                <iframe src="https://ota-sanpot.github.io/sample_store/" loading="lazy" title="作例A プレビュー"></iframe>
+              </div>
             </div>
             <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 01　／　和食・割烹</p>
             <p style="font-size:16px;font-weight:500;color:#1A1613;margin-bottom:12px;">サンプル店舗 V1</p>
             <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">市場直送の魚と全国の純米酒。夜更けに寄り添う一軒。</p>
-            <p style="margin-top:20px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る　→</p>
+            <p style="margin-top:20px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
           </a>
 
           <!-- 作例B -->
           <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
-            <div style="aspect-ratio:9/16;background:#FBF8F1;border:1px solid #D9CFBD;display:flex;align-items:center;justify-content:center;margin-bottom:24px;overflow:hidden;">
-              <iframe src="https://ota-sanpot.github.io/sample_store_v2/" style="width:100%;height:100%;border:0;pointer-events:none;" loading="lazy" title="作例B プレビュー"></iframe>
+            <div class="phone-bezel" style="margin-bottom:24px;">
+              <div class="phone-screen">
+                <iframe src="https://ota-sanpot.github.io/sample_store_v2/" loading="lazy" title="作例B プレビュー"></iframe>
+              </div>
             </div>
             <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 02　／　海鮮居酒屋</p>
             <p style="font-size:16px;font-weight:500;color:#1A1613;margin-bottom:12px;">サンプル店舗 V2</p>
             <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">豊洲直送の刺身と全国の純米酒。サク呑みから二次会まで。</p>
-            <p style="margin-top:20px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る　→</p>
+            <p style="margin-top:20px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
           </a>
 
         </div>
@@ -194,12 +617,14 @@
         <p class="text-center reveal" style="margin-top:48px;font-size:11px;color:#A87B4B;letter-spacing:.15em;">これらはサンプルです。お店ごとに、写真と文章を差し替えてお作りします。</p>
       </div>
     </section>
-    <!-- SECTION 03 / PAIN (Task 4) -->
+
+    <!-- SECTION 03 / PAIN -->
     <section id="pain" class="bg-paper">
+      <div class="chapter-mark" aria-hidden="true">03</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow">PAIN</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">こんな悩み、ありませんか。</h2>
+          <p class="eyebrow"><span class="roman">— III —</span><span class="sep"></span>PAIN</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">こんな悩み、ありませんか。</h2>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr;gap:32px;max-width:720px;margin:0 auto;">
@@ -226,33 +651,47 @@
         </div>
       </div>
     </section>
-    <!-- SECTION 04 / CONCEPT (Task 5) -->
-    <section id="concept" style="background:#1A1613;color:#fff;">
-      <div class="section-wrap text-center">
-        <p class="eyebrow reveal" style="color:#C9A063;">CONCEPT</p>
 
-        <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;letter-spacing:.04em;color:#fff;line-height:1.6;">
-          ホームページではなく、<br><span style="font-weight:500;color:#C9A063;">看板</span>を。
+    <!-- Ornament: PAIN → CONCEPT -->
+    <div aria-hidden="true" class="ornament">
+      <span class="ornament-line"></span><span class="ornament-mark">✦</span><span class="ornament-line"></span>
+    </div>
+
+    <!-- SECTION 04 / CONCEPT — visual centerpiece -->
+    <section id="concept" style="background:#1A1613;color:#fff;">
+      <div class="concept-quote-glyph" aria-hidden="true">“</div>
+      <div class="chapter-mark" aria-hidden="true" style="color: rgba(201,160,99,0.05);">04</div>
+      <div class="section-wrap text-center">
+        <p class="eyebrow reveal" style="color:#C9A063;">
+          <span class="roman">— IV —</span><span class="sep"></span>CONCEPT
+        </p>
+
+        <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;color:#fff;">
+          ホームページではなく、<br><span class="concept-emph-underline" style="font-weight:500;color:#C9A063;">看板</span>を。
         </h2>
 
-        <div class="reveal" style="max-width:540px;margin:48px auto 0;font-size:14px;line-height:2.4;font-weight:300;color:rgba(255,255,255,0.75);">
+        <blockquote class="reveal concept-quote">
           通りすがりの誰かが、ふと立ち止まる。<br>
           名前と、佇まいと、場所だけ伝わればいい。<br>
           看板に必要なのは、それだけです。
-        </div>
+        </blockquote>
 
-        <div class="reveal" style="margin-top:48px;font-size:13px;color:rgba(255,255,255,0.6);line-height:2;">
+        <p class="reveal concept-editor-note">— A note from the editor —</p>
+
+        <div class="reveal" style="margin-top:40px;font-size:13px;color:rgba(255,255,255,0.6);line-height:2;">
           私たちが作るのは、ホームページの形をした、<br>
           お店の<span style="color:#C9A063;font-weight:500;">デジタル看板</span>。
         </div>
       </div>
     </section>
-    <!-- SECTION 05 / VALUE (Task 6) -->
+
+    <!-- SECTION 05 / VALUE -->
     <section id="value" class="bg-paper">
+      <div class="chapter-mark" aria-hidden="true">05</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow">VALUE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">サンポットのHP、4つの特徴。</h2>
+          <p class="eyebrow"><span class="roman">— V —</span><span class="sep"></span>VALUE</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">サンポットのHP、4つの特徴。</h2>
         </div>
 
         <div style="display:grid;gap:48px;max-width:720px;margin:0 auto;" class="grid-cols-1 md:grid-cols-2">
@@ -284,12 +723,14 @@
         </div>
       </div>
     </section>
-    <!-- SECTION 06 / SCOPE (Task 7) -->
+
+    <!-- SECTION 06 / SCOPE -->
     <section id="scope" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
+      <div class="chapter-mark" aria-hidden="true">06</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:48px;">
-          <p class="eyebrow">SCOPE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">「看板」に必要なものを、すべて。</h2>
+          <p class="eyebrow"><span class="roman">— VI —</span><span class="sep"></span>SCOPE</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">「看板」に必要なものを、すべて。</h2>
           <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">含まれるもの／含まれないもの、最初に明示します。</p>
         </div>
 
@@ -323,12 +764,14 @@
         </div>
       </div>
     </section>
-    <!-- SECTION 07 / FLOW (Task 8) -->
+
+    <!-- SECTION 07 / FLOW -->
     <section id="flow" class="bg-paper">
+      <div class="chapter-mark" aria-hidden="true">07</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow">FLOW</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">制作の流れ。</h2>
+          <p class="eyebrow"><span class="roman">— VII —</span><span class="sep"></span>FLOW</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">制作の流れ。</h2>
         </div>
 
         <ol style="list-style:none;padding:0;margin:0;max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:0;">
@@ -368,10 +811,17 @@
         </ol>
       </div>
     </section>
-    <!-- SECTION 08 / TRUST (Task 9) -->
+
+    <!-- Ornament: FLOW → TRUST -->
+    <div aria-hidden="true" class="ornament">
+      <span class="ornament-line"></span><span class="ornament-mark">✦</span><span class="ornament-line"></span>
+    </div>
+
+    <!-- SECTION 08 / TRUST -->
     <section id="trust" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
+      <div class="chapter-mark" aria-hidden="true">08</div>
       <div class="section-wrap text-center">
-        <p class="eyebrow reveal">WHO WE ARE</p>
+        <p class="eyebrow reveal"><span class="roman">— VIII —</span><span class="sep"></span>WHO WE ARE</p>
 
         <p class="reveal" style="margin-top:32px;font-size:15px;line-height:2.2;font-weight:300;color:#1A1613;max-width:600px;margin-left:auto;margin-right:auto;">
           大田区の飲食店を、SNSで<span style="font-weight:700;color:#A87B4B;">2万人</span>にお届けしてきた<br>
@@ -394,16 +844,18 @@
         </div>
 
         <div class="reveal" style="margin-top:48px;">
-          <a href="https://ota-sanpot.com/" target="_blank" rel="noopener" class="btn-outline">サンポット本体を見る　→</a>
+          <a href="https://ota-sanpot.com/" target="_blank" rel="noopener" class="btn-outline">サンポット本体を見る<span class="arrow-anim" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
-    <!-- SECTION 09 / FAQ (Task 10) -->
+
+    <!-- SECTION 09 / FAQ -->
     <section id="faq" class="bg-paper">
+      <div class="chapter-mark" aria-hidden="true">09</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:48px;">
-          <p class="eyebrow">FAQ</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">よくある質問。</h2>
+          <p class="eyebrow"><span class="roman">— IX —</span><span class="sep"></span>FAQ</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">よくある質問。</h2>
         </div>
 
         <div style="max-width:720px;margin:0 auto;">
@@ -436,12 +888,13 @@
         </div>
       </div>
     </section>
-    <!-- SECTION 10 / CTA (Task 11) -->
+
+    <!-- SECTION 10 / CTA -->
     <section id="contact" style="background:#1A1613;color:#fff;">
       <div class="section-wrap text-center">
-        <p class="eyebrow reveal" style="color:#C9A063;">CONTACT</p>
+        <p class="eyebrow reveal" style="color:#C9A063;"><span class="roman">— X —</span><span class="sep"></span>CONTACT</p>
 
-        <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;letter-spacing:.04em;color:#fff;line-height:1.6;">
+        <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;color:#fff;">
           まずは、<br>無料で相談してみませんか。
         </h2>
 
@@ -451,7 +904,7 @@
 
         <div class="reveal" style="margin-top:48px;">
           <a href="https://forms.gle/8inimr7e3HsyYQD9A" target="_blank" rel="noopener noreferrer" class="btn-gold">
-            無料で相談する　→
+            無料で相談する<span class="arrow-anim" aria-hidden="true">→</span>
           </a>
         </div>
 
@@ -460,11 +913,37 @@
     </section>
   </main>
 
-  <footer style="background:#0F0D0B;color:rgba(255,255,255,0.4);padding:40px 24px;text-align:center;font-size:11px;letter-spacing:.1em;">
-    <p style="margin-bottom:12px;">
-      <a href="https://ota-sanpot.com/" target="_blank" rel="noopener" style="color:#C9A063;text-decoration:none;">大田区サンポット</a>　／　<a href="https://ota-sanpot.github.io/sns_consul/" target="_blank" rel="noopener" style="color:#C9A063;text-decoration:none;">GURUMA（SNSコンサル）</a>
-    </p>
-    <p>&copy; 大田区サンポット　Simple Homepage Service</p>
+  <!-- === Footer === -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="brand-block">
+        <p class="brand-name">OTA SANPOT × SIMPLE HOMEPAGE</p>
+        <p class="brand-tag">飲食店のための、1ページ完結のデジタル看板。</p>
+      </div>
+      <div class="index-block">
+        <p class="index-label">INDEX</p>
+        <ul class="index-list">
+          <li><a href="#hero"><span class="num">I</span>HERO</a></li>
+          <li><a href="#showcase"><span class="num">II</span>SHOWCASE</a></li>
+          <li><a href="#pain"><span class="num">III</span>PAIN</a></li>
+          <li><a href="#concept"><span class="num">IV</span>CONCEPT</a></li>
+          <li><a href="#value"><span class="num">V</span>VALUE</a></li>
+          <li><a href="#scope"><span class="num">VI</span>SCOPE</a></li>
+          <li><a href="#flow"><span class="num">VII</span>FLOW</a></li>
+          <li><a href="#trust"><span class="num">VIII</span>TRUST</a></li>
+          <li><a href="#faq"><span class="num">IX</span>FAQ</a></li>
+          <li><a href="#contact"><span class="num">X</span>CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p>&copy; 大田区サンポット　Simple Homepage Service</p>
+      <p>
+        <a href="https://ota-sanpot.com/" target="_blank" rel="noopener">大田区サンポット</a>
+        　／
+        <a href="https://ota-sanpot.github.io/sns_consul/" target="_blank" rel="noopener">GURUMA（SNSコンサル）</a>
+      </p>
+    </div>
   </footer>
 
   <script>
@@ -473,6 +952,26 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // スティッキーヘッダーの表示切替（ヒーロー通過後に出現）
+    (function(){
+      const header = document.getElementById('siteHeader');
+      const hero = document.getElementById('hero');
+      if (!header || !hero) return;
+      let threshold = 0;
+      const recompute = () => {
+        const rect = hero.getBoundingClientRect();
+        threshold = (rect.top + window.scrollY) + hero.offsetHeight - 80;
+      };
+      recompute();
+      window.addEventListener('resize', recompute, { passive: true });
+      const onScroll = () => {
+        if (window.scrollY > threshold) header.classList.add('is-visible');
+        else header.classList.remove('is-visible');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
   </script>
 
 </body>
