@@ -11,6 +11,12 @@
   <meta property="og:description" content="飲食店のための、1ページで完結するブランディング・ウェブ。制作費¥25,000、月額¥0。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ota-sanpot.github.io/simple-hp/">
+  <meta property="og:image" content="https://ota-sanpot.github.io/simple-hp/assets/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon & Touch icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 
   <!-- Fonts: Noto Sans JP のみ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -304,7 +310,7 @@
     }
     .site-header .brand {
       display: inline-flex;
-      align-items: baseline;
+      align-items: center;
       gap: 0;
       font-size: 12px;
       letter-spacing: .14em;
@@ -322,11 +328,10 @@
       margin: 0 10px;
       opacity: .6;
     }
-    .site-header .brand .brand-jp {
-      font-size: 13px;
-      font-weight: 500;
-      color: #1A1613;
-      letter-spacing: .12em;
+    .site-header .brand .brand-logo {
+      height: 32px;
+      width: auto;
+      display: block;
     }
     .site-header .nav-cta {
       display: inline-flex;
@@ -520,7 +525,7 @@
     <a href="#hero" class="brand" aria-label="OTA SANPOT / Simple Branding Web for Food">
       <span class="brand-lat">OTA SANPOT</span>
       <span class="brand-sep">／</span>
-      <span class="brand-jp">Simple Branding Web</span>
+      <img src="assets/logo-320.png" alt="Simple Branding Web for Food" class="brand-logo">
     </a>
     <a href="#contact" class="nav-cta">相談する</a>
   </header>
@@ -532,8 +537,12 @@
       <div class="hero-side-label" aria-hidden="true">OTA SANPOT　／　SIMPLE BRANDING WEB FOR FOOD　／　001</div>
 
       <div class="section-wrap text-center">
-        <p class="eyebrow reveal">
-          <span>OTA SANPOT　／　SIMPLE BRANDING WEB FOR FOOD</span>
+        <div class="reveal" style="display:flex;justify-content:center;margin-bottom:28px;">
+          <img src="assets/logo-320.png" alt="Simple Branding Web for Food" style="width:auto;max-width:180px;height:auto;display:block;">
+        </div>
+
+        <p class="eyebrow reveal" style="opacity:0.85;">
+          <span>OTA SANPOT　／　飲食店のためのブランディング・ウェブ</span>
         </p>
         <p class="prologue reveal">— I — PROLOGUE</p>
 
