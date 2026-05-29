@@ -55,6 +55,11 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: all 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* JS失敗時・モーション抑制時のフォールバック */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
     /* セクション共通 */
     .section-wrap { max-width: 920px; margin: 0 auto; padding: 96px 24px; }
     @media (min-width: 768px) { .section-wrap { padding: 128px 32px; } }
@@ -81,6 +86,24 @@
       transition: background .2s ease, color .2s ease;
     }
     .btn-outline:hover { background: #1A1613; color: #fff; }
+    .btn-gold {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #C9A063; color: #1A1613;
+      padding: 18px 44px;
+      font-size: 14px; font-weight: 500; letter-spacing: .2em;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .btn-gold:hover, .btn-gold:focus-visible { background: #A87B4B; color: #fff; transform: translateY(-1px); }
+
+    /* SHOWCASEカード */
+    .showcase-card { transition: transform .3s ease, box-shadow .3s ease; }
+    .showcase-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,22,19,0.08); }
+
+    /* FAQアコーディオン */
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary > span:last-child { transform: rotate(45deg); transition: transform .2s ease; }
+    details summary > span:last-child { display: inline-block; transition: transform .2s ease; }
 
     /* キーボードフォーカスリング（アクセシビリティ） */
     a:focus-visible, summary:focus-visible {
@@ -88,6 +111,9 @@
       outline-offset: 4px;
     }
   </style>
+  <noscript>
+    <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
 </head>
 <body>
 
@@ -130,10 +156,10 @@
           <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">クリックすると、別タブで実際のページが開きます。</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr;gap:48px;" class="md:grid-cols-2">
+        <div style="display:grid;gap:48px;" class="grid-cols-1 md:grid-cols-2">
 
           <!-- 作例A -->
-          <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="reveal" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;transition:transform .3s ease, box-shadow .3s ease;">
+          <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
             <div style="aspect-ratio:9/16;background:#FBF8F1;border:1px solid #D9CFBD;display:flex;align-items:center;justify-content:center;margin-bottom:24px;overflow:hidden;">
               <iframe src="https://ota-sanpot.github.io/sample_store/" style="width:100%;height:100%;border:0;pointer-events:none;" loading="lazy" title="作例A プレビュー"></iframe>
             </div>
@@ -144,7 +170,7 @@
           </a>
 
           <!-- 作例B -->
-          <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="reveal" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;transition:transform .3s ease, box-shadow .3s ease;">
+          <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
             <div style="aspect-ratio:9/16;background:#FBF8F1;border:1px solid #D9CFBD;display:flex;align-items:center;justify-content:center;margin-bottom:24px;overflow:hidden;">
               <iframe src="https://ota-sanpot.github.io/sample_store_v2/" style="width:100%;height:100%;border:0;pointer-events:none;" loading="lazy" title="作例B プレビュー"></iframe>
             </div>
@@ -212,7 +238,7 @@
           <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:.04em;color:#1A1613;">サンポットのHP、4つの特徴。</h2>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr;gap:48px;max-width:720px;margin:0 auto;" class="md:grid-cols-2">
+        <div style="display:grid;gap:48px;max-width:720px;margin:0 auto;" class="grid-cols-1 md:grid-cols-2">
 
           <div class="reveal">
             <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">01</p>
@@ -250,7 +276,7 @@
           <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">含まれるもの／含まれないもの、最初に明示します。</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr;gap:48px;max-width:840px;margin:0 auto;" class="md:grid-cols-2">
+        <div style="display:grid;gap:48px;max-width:840px;margin:0 auto;" class="grid-cols-1 md:grid-cols-2">
 
           <!-- 含まれるもの -->
           <div class="reveal" style="background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
@@ -393,12 +419,6 @@
         </div>
       </div>
     </section>
-
-    <style>
-      details summary::-webkit-details-marker { display: none; }
-      details[open] summary > span:last-child { transform: rotate(45deg); transition: transform .2s ease; }
-      details summary > span:last-child { display: inline-block; transition: transform .2s ease; }
-    </style>
     <!-- SECTION 10 / CTA (Task 11) -->
     <section id="contact" style="background:#1A1613;color:#fff;">
       <div class="section-wrap text-center">
@@ -413,7 +433,7 @@
         </p>
 
         <div class="reveal" style="margin-top:48px;">
-          <a href="#FORM_URL_PLACEHOLDER" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background:#C9A063;color:#1A1613;padding:18px 44px;font-size:14px;font-weight:500;letter-spacing:.2em;text-decoration:none;transition:background .2s ease, transform .2s ease;" onmouseover="this.style.background='#A87B4B';this.style.color='#fff';" onmouseout="this.style.background='#C9A063';this.style.color='#1A1613';">
+          <a href="#FORM_URL_PLACEHOLDER" target="_blank" rel="noopener noreferrer" class="btn-gold">
             無料で相談する　→
           </a>
         </div>
