@@ -79,6 +79,10 @@
       z-index: 1;
     }
     @media (min-width: 768px) { .section-wrap { padding: 128px 32px; } }
+
+    /* HERO は上を詰める（ロゴと sticky header があるので余白を抑える） */
+    #hero .section-wrap { padding-top: 48px; }
+    @media (min-width: 768px) { #hero .section-wrap { padding-top: 72px; } }
     section { position: relative; overflow: hidden; }
 
     /* ラベル（small caps風） — 編集デザインに寄せる */
@@ -590,36 +594,88 @@
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:64px;">
           <p class="eyebrow"><span class="roman">— II —</span><span class="sep"></span>SHOWCASE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">実物を、見てみる。</h2>
-          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">クリックすると、別タブで実際のページが開きます。</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">業態別、6つの実物。</h2>
+          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">和食・海鮮・カフェ・焼肉・バー・ラーメンの 6 パターン。<br>クリックすると、別タブで実際のページが開きます。</p>
         </div>
 
-        <div style="display:grid;gap:48px;" class="grid-cols-1 md:grid-cols-2">
+        <div style="display:grid;gap:36px;" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
-          <!-- 作例A -->
-          <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:24px;">
+          <!-- V1 -->
+          <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
+            <div class="phone-bezel" style="margin-bottom:20px;">
               <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store/" loading="lazy" title="作例A プレビュー"></iframe>
+                <iframe src="https://ota-sanpot.github.io/sample_store/" loading="lazy" title="サンプル店舗 V1 プレビュー"></iframe>
               </div>
             </div>
             <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 01　／　和食・割烹</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;margin-bottom:12px;">サンプル店舗 V1</p>
+            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V1</p>
             <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">市場直送の魚と全国の純米酒。夜更けに寄り添う一軒。</p>
-            <p style="margin-top:20px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
+            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
           </a>
 
-          <!-- 作例B -->
-          <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:24px;">
+          <!-- V2 -->
+          <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
+            <div class="phone-bezel" style="margin-bottom:20px;">
               <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store_v2/" loading="lazy" title="作例B プレビュー"></iframe>
+                <iframe src="https://ota-sanpot.github.io/sample_store_v2/" loading="lazy" title="サンプル店舗 V2 プレビュー"></iframe>
               </div>
             </div>
             <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 02　／　海鮮居酒屋</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;margin-bottom:12px;">サンプル店舗 V2</p>
+            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V2</p>
             <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">豊洲直送の刺身と全国の純米酒。サク呑みから二次会まで。</p>
-            <p style="margin-top:20px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
+            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
+          </a>
+
+          <!-- V3 -->
+          <a href="https://ota-sanpot.github.io/sample_store_v3/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
+            <div class="phone-bezel" style="margin-bottom:20px;">
+              <div class="phone-screen">
+                <iframe src="https://ota-sanpot.github.io/sample_store_v3/" loading="lazy" title="サンプル店舗 V3 プレビュー"></iframe>
+              </div>
+            </div>
+            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 03　／　カフェ・ベーカリー</p>
+            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V3</p>
+            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">朝のパンと、午後の珈琲。一日中、誰かが居る場所。</p>
+            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
+          </a>
+
+          <!-- V4 -->
+          <a href="https://ota-sanpot.github.io/sample_store_v4/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
+            <div class="phone-bezel" style="margin-bottom:20px;">
+              <div class="phone-screen">
+                <iframe src="https://ota-sanpot.github.io/sample_store_v4/" loading="lazy" title="サンプル店舗 V4 プレビュー"></iframe>
+              </div>
+            </div>
+            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 04　／　焼肉</p>
+            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V4</p>
+            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">炭火と一頭買いの上質肉。蒲田で、ちょっといい夜を。</p>
+            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
+          </a>
+
+          <!-- V5 -->
+          <a href="https://ota-sanpot.github.io/sample_store_v5/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
+            <div class="phone-bezel" style="margin-bottom:20px;">
+              <div class="phone-screen">
+                <iframe src="https://ota-sanpot.github.io/sample_store_v5/" loading="lazy" title="サンプル店舗 V5 プレビュー"></iframe>
+              </div>
+            </div>
+            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 05　／　ワインビストロ・バー</p>
+            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V5</p>
+            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">小皿とグラスワイン。仕事帰りの一杯から、しっとり二次会まで。</p>
+            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
+          </a>
+
+          <!-- V6 -->
+          <a href="https://ota-sanpot.github.io/sample_store_v6/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
+            <div class="phone-bezel" style="margin-bottom:20px;">
+              <div class="phone-screen">
+                <iframe src="https://ota-sanpot.github.io/sample_store_v6/" loading="lazy" title="サンプル店舗 V6 プレビュー"></iframe>
+              </div>
+            </div>
+            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 06　／　ラーメン・町中華</p>
+            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V6</p>
+            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">店主こだわりの一杯。早く、熱く、確かな一杯を蒲田で。</p>
+            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
           </a>
 
         </div>
