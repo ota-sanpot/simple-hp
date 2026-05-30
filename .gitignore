@@ -1,3 +1,6 @@
 .DS_Store
 .superpowers/
 node_modules/
+
+# 社内資料は公開しない
+intake/
