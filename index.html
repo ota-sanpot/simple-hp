@@ -266,11 +266,17 @@
       align-items: center;
       justify-content: center;
     }
+    /* iframe は標準スマホ幅(390px)で描画し、枠サイズに縮小表示する
+       （狭い実幅でレンダリングするとサイト側が崩れるため） */
     .phone-bezel .phone-screen iframe {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 390px;
+      height: 694px; /* 390 * 16/9 ≒ 693 を満たす高さ */
       border: 0;
       pointer-events: none;
+      transform-origin: top left;
     }
 
     /* FAQアコーディオン */
@@ -1318,6 +1324,22 @@
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+    })();
+
+    // SHOWCASE プレビュー: 390px描画の iframe を枠幅に合わせて縮小
+    (function(){
+      const BASE = 390;
+      function fitPreviews(){
+        document.querySelectorAll('.phone-bezel .phone-screen').forEach(screen => {
+          const iframe = screen.querySelector('iframe');
+          if (!iframe) return;
+          const scale = screen.clientWidth / BASE;
+          iframe.style.transform = 'scale(' + scale + ')';
+        });
+      }
+      window.addEventListener('resize', fitPreviews, { passive: true });
+      window.addEventListener('load', fitPreviews);
+      fitPreviews();
     })();
   </script>
 
