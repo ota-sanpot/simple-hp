@@ -514,6 +514,135 @@
       text-decoration: underline;
       text-underline-offset: 3px;
     }
+
+    /* === COMPARISON 比較表 === */
+    .cmp {
+      max-width: 880px;
+      margin: 0 auto;
+      border: 1px solid #D9CFBD;
+      background: #FBF8F1;
+    }
+    .cmp-head {
+      display: grid;
+      grid-template-columns: 1.25fr 1.1fr 1fr 1fr;
+      border-bottom: 1px solid #1A1613;
+    }
+    .cmp-head > div {
+      padding: 18px 14px 16px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: #1A1613;
+      line-height: 1.5;
+      letter-spacing: .03em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .cmp-head .cmp-col-self {
+      background: #1A1613;
+      color: #fff;
+    }
+    .cmp-head .cmp-col-self .cmp-h-brand { color: #fff; font-weight: 500; }
+    .cmp-self-tag {
+      font-size: 9px;
+      letter-spacing: .3em;
+      color: #C9A063;
+      margin-bottom: 6px;
+    }
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 1.25fr 1.1fr 1fr 1fr;
+      border-top: 1px solid #E6DCC9;
+    }
+    .cmp-head + .cmp-row { border-top: 0; }
+    .cmp-label {
+      padding: 20px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #1A1613;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      background: #F5EFE4;
+    }
+    .cmp-cell {
+      padding: 18px 14px;
+      font-size: 13px;
+      color: #6B5A4E;
+      line-height: 1.7;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .cmp-cell strong {
+      font-size: 18px;
+      font-weight: 500;
+      color: #1A1613;
+      letter-spacing: .01em;
+    }
+    .cmp-cell-self {
+      background: rgba(201, 160, 99, 0.10);
+      color: #1A1613;
+    }
+    .cmp-cell-self strong { color: #A87B4B; }
+    .cmp-mark { font-size: 18px; color: #A87B4B; font-weight: 500; line-height: 1; }
+    .cmp-note { font-size: 10px; color: #A87B4B; letter-spacing: .02em; line-height: 1.6; }
+    .cmp-src { display: none; }
+    .cmp-foot {
+      max-width: 880px;
+      margin: 24px auto 0;
+      font-size: 11px;
+      color: #6B5A4E;
+      line-height: 1.9;
+      text-align: center;
+      letter-spacing: .03em;
+    }
+
+    /* スマホ: 項目ごとのカードに組み替え（横スクロール回避） */
+    @media (max-width: 767px) {
+      .cmp { border: 0; background: transparent; }
+      .cmp-head { display: none; }
+      .cmp-row {
+        display: block;
+        border: 1px solid #D9CFBD;
+        background: #FBF8F1;
+        margin-bottom: 16px;
+      }
+      .cmp-label {
+        background: #1A1613;
+        color: #fff;
+        font-size: 12px;
+        letter-spacing: .16em;
+        padding: 12px 16px;
+      }
+      .cmp-cell {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 4px 8px;
+        padding: 14px 16px;
+        border-top: 1px solid #E6DCC9;
+      }
+      .cmp-cell-self { background: rgba(201, 160, 99, 0.12); }
+      .cmp-src {
+        display: block;
+        width: 100%;
+        font-size: 10px;
+        letter-spacing: .14em;
+        color: #A87B4B;
+        font-weight: 500;
+        margin-bottom: 1px;
+      }
+      .cmp-cell strong { font-size: 16px; }
+      .cmp-mark { font-size: 15px; }
+    }
   </style>
   <noscript>
     <style>
@@ -886,12 +1015,96 @@
       </div>
     </section>
 
-    <!-- SECTION 08 / FLOW -->
-    <section id="flow" class="bg-paper">
+    <!-- SECTION 08 / COMPARISON -->
+    <section id="comparison" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
       <div class="chapter-mark" aria-hidden="true">08</div>
       <div class="section-wrap">
+        <div class="text-center reveal" style="margin-bottom:56px;">
+          <p class="eyebrow"><span class="roman">— VIII —</span><span class="sep"></span>COMPARISON</p>
+          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">“看板1枚”を、どこに頼むか。</h2>
+          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">同じ「お店のWeb」でも、頼み先で費用も手間も大きく変わります。</p>
+        </div>
+
+        <div class="cmp reveal">
+          <!-- 見出し行（PC表示） -->
+          <div class="cmp-head">
+            <div aria-hidden="true"></div>
+            <div class="cmp-col-self">
+              <span class="cmp-self-tag">RECOMMENDED</span>
+              <span class="cmp-h-brand">Simple Branding Web</span>
+            </div>
+            <div>一般的な<br>Web制作会社</div>
+            <div>自作ツール<br>(Wix・ペライチ等)</div>
+          </div>
+
+          <!-- 初期費用 -->
+          <div class="cmp-row">
+            <div class="cmp-label">初期費用</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong>¥25,000</strong><span class="cmp-note">買い切り・税込</span></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>約 ¥150,000〜500,000＋<span class="cmp-note">目安・ピンキリ</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>¥0〜<span class="cmp-note">代わりに自分の時間</span></div>
+          </div>
+
+          <!-- 月額・固定費 -->
+          <div class="cmp-row">
+            <div class="cmp-label">月額・固定費</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong>¥0</strong></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>月 ¥3,000〜10,000<span class="cmp-note">保守・サーバー</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>月 ¥1,000〜3,000<span class="cmp-note">ドメイン・有料プラン</span></div>
+          </div>
+
+          <!-- 飲食店への精通 -->
+          <div class="cmp-row">
+            <div class="cmp-label">飲食店への精通</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><span class="cmp-mark">◎</span><span class="cmp-note" style="color:#1A1613;">飲食店を2万人に届けた地域メディアが制作</span></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span><span class="cmp-mark" style="color:#6B5A4E;">△</span><span class="cmp-note">業種は様々。飲食特化とは限らない</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>テンプレ任せ<span class="cmp-note">魅せ方は自分次第</span></div>
+          </div>
+
+          <!-- オーナーの手間 -->
+          <div class="cmp-row">
+            <div class="cmp-label">オーナーの手間</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span>ほぼお任せ<span class="cmp-note">写真と情報を渡すだけ</span></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>打ち合わせ多め<span class="cmp-note">要件確認に時間</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>全部自分<span class="cmp-note">文章も写真も組み立ても</span></div>
+          </div>
+
+          <!-- 公開までの期間 -->
+          <div class="cmp-row">
+            <div class="cmp-label">公開までの期間</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong style="font-size:15px;">最短1週間</strong></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>1〜3ヶ月<span class="cmp-note">が一般的</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>自分次第<span class="cmp-note">数日〜挫折も</span></div>
+          </div>
+
+          <!-- プランの分かりやすさ -->
+          <div class="cmp-row">
+            <div class="cmp-label">プランの<br>分かりやすさ</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span>1プラン一択<span class="cmp-note">明朗会計・「〜」表記なし</span></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>プラン多数<span class="cmp-note">オプションで変動</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>段階プラン<span class="cmp-note">無料〜有料</span></div>
+          </div>
+
+          <!-- 地域での発信・拡散 -->
+          <div class="cmp-row">
+            <div class="cmp-label">地域での発信・拡散</div>
+            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><span class="cmp-mark">◎</span><span class="cmp-note" style="color:#1A1613;">地域メディア発。拡散や“見られ方”も相談できる</span></div>
+            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span><span class="cmp-mark" style="color:#B7AB98;">—</span><span class="cmp-note">制作のみ</span></div>
+            <div class="cmp-cell"><span class="cmp-src">自作ツール</span><span class="cmp-mark" style="color:#B7AB98;">—</span><span class="cmp-note">運用は自分</span></div>
+          </div>
+
+        </div>
+
+        <p class="cmp-foot reveal">※ 本格的なEC・予約システムが必要なら、制作会社の方が向いています。Simple Branding Web は“1枚の看板”に特化したサービスです。</p>
+      </div>
+    </section>
+
+    <!-- SECTION 09 / FLOW -->
+    <section id="flow" class="bg-paper">
+      <div class="chapter-mark" aria-hidden="true">09</div>
+      <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow"><span class="roman">— VIII —</span><span class="sep"></span>FLOW</p>
+          <p class="eyebrow"><span class="roman">— IX —</span><span class="sep"></span>FLOW</p>
           <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">制作の流れ。</h2>
         </div>
 
@@ -916,7 +1129,7 @@
           <li class="reveal" style="display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;padding:28px 0;border-bottom:1px solid #D9CFBD;">
             <div style="font-size:32px;font-weight:300;color:#A87B4B;line-height:1;">03</div>
             <div>
-              <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">1〜2週間で初稿 → 公開</h3>
+              <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">最短1週間で初稿 → 公開</h3>
               <p style="font-size:13px;color:#6B5A4E;line-height:2;">初稿をご確認いただき、調整後に公開。ドメインの取得もこちらでサポートします。</p>
             </div>
           </li>
@@ -940,9 +1153,9 @@
 
     <!-- SECTION 09 / TRUST -->
     <section id="trust" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
-      <div class="chapter-mark" aria-hidden="true">09</div>
+      <div class="chapter-mark" aria-hidden="true">10</div>
       <div class="section-wrap text-center">
-        <p class="eyebrow reveal"><span class="roman">— IX —</span><span class="sep"></span>WHO WE ARE</p>
+        <p class="eyebrow reveal"><span class="roman">— X —</span><span class="sep"></span>WHO WE ARE</p>
 
         <p class="reveal" style="margin-top:32px;font-size:15px;line-height:2.2;font-weight:300;color:#1A1613;max-width:600px;margin-left:auto;margin-right:auto;">
           大田区の飲食店を、SNSで<span style="font-weight:700;color:#A87B4B;">2万人</span>にお届けしてきた<br>
@@ -972,10 +1185,10 @@
 
     <!-- SECTION 10 / FAQ -->
     <section id="faq" class="bg-paper">
-      <div class="chapter-mark" aria-hidden="true">10</div>
+      <div class="chapter-mark" aria-hidden="true">11</div>
       <div class="section-wrap">
         <div class="text-center reveal" style="margin-bottom:48px;">
-          <p class="eyebrow"><span class="roman">— X —</span><span class="sep"></span>FAQ</p>
+          <p class="eyebrow"><span class="roman">— XI —</span><span class="sep"></span>FAQ</p>
           <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">よくある質問。</h2>
         </div>
 
@@ -998,7 +1211,7 @@
 
           <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
             <summary style="font-size:14px;font-weight:500;color:#1A1613;list-style:none;display:flex;justify-content:space-between;align-items:center;"><span><span style="color:#A87B4B;margin-right:12px;">Q.</span>どれくらいで公開できますか？</span><span style="color:#A87B4B;font-weight:300;">＋</span></summary>
-            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">素材（写真・テキスト）をお預かりしてから、1〜2週間で初稿をお見せします。ご確認後の調整を経て、最短2週間ほどで公開可能です。</p>
+            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">素材（写真・テキスト）をお預かりしてから、最短1週間で公開できます。初稿をご確認いただき、調整を経て公開、という流れです。</p>
           </details>
 
           <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
@@ -1013,7 +1226,7 @@
     <!-- SECTION 11 / CTA -->
     <section id="contact" style="background:#1A1613;color:#fff;">
       <div class="section-wrap text-center">
-        <p class="eyebrow reveal" style="color:#C9A063;"><span class="roman">— XI —</span><span class="sep"></span>CONTACT</p>
+        <p class="eyebrow reveal" style="color:#C9A063;"><span class="roman">— XII —</span><span class="sep"></span>CONTACT</p>
 
         <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;color:#fff;">
           まずは、<br>無料で相談してみませんか。
@@ -1051,10 +1264,11 @@
           <li><a href="#value"><span class="num">V</span>VALUE</a></li>
           <li><a href="#scope"><span class="num">VI</span>SCOPE</a></li>
           <li><a href="#usecases"><span class="num">VII</span>USE CASES</a></li>
-          <li><a href="#flow"><span class="num">VIII</span>FLOW</a></li>
-          <li><a href="#trust"><span class="num">IX</span>TRUST</a></li>
-          <li><a href="#faq"><span class="num">X</span>FAQ</a></li>
-          <li><a href="#contact"><span class="num">XI</span>CONTACT</a></li>
+          <li><a href="#comparison"><span class="num">VIII</span>COMPARISON</a></li>
+          <li><a href="#flow"><span class="num">IX</span>FLOW</a></li>
+          <li><a href="#trust"><span class="num">X</span>TRUST</a></li>
+          <li><a href="#faq"><span class="num">XI</span>FAQ</a></li>
+          <li><a href="#contact"><span class="num">XII</span>CONTACT</a></li>
         </ul>
       </div>
     </div>
