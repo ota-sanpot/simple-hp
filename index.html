@@ -543,8 +543,11 @@
     .cmp-head .cmp-col-self {
       background: #1A1613;
       color: #fff;
+      border-left: 2px solid #C9A063;
+      border-right: 2px solid #C9A063;
+      border-top: 2px solid #C9A063;
     }
-    .cmp-head .cmp-col-self .cmp-h-brand { color: #fff; font-weight: 500; }
+    .cmp-head .cmp-col-self .cmp-h-brand { color: #fff; font-weight: 700; font-size: 13px; }
     .cmp-self-tag {
       font-size: 9px;
       letter-spacing: .3em;
@@ -586,10 +589,15 @@
       letter-spacing: .01em;
     }
     .cmp-cell-self {
-      background: rgba(201, 160, 99, 0.10);
+      background: rgba(201, 160, 99, 0.24);
       color: #1A1613;
+      border-left: 2px solid #C9A063;
+      border-right: 2px solid #C9A063;
     }
-    .cmp-cell-self strong { color: #A87B4B; }
+    .cmp-cell-self strong { color: #1A1613; font-weight: 700; }
+    .cmp-cell-self .cmp-mark { color: #8A5A24; }
+    .cmp-cell-self .cmp-note { color: #8A5A24; }
+    .cmp-row:last-child .cmp-cell-self { border-bottom: 2px solid #C9A063; }
     .cmp-mark { font-size: 18px; color: #A87B4B; font-weight: 500; line-height: 1; }
     .cmp-note { font-size: 10px; color: #A87B4B; letter-spacing: .02em; line-height: 1.6; }
     .cmp-src { display: none; }
@@ -630,7 +638,10 @@
         padding: 14px 16px;
         border-top: 1px solid #E6DCC9;
       }
-      .cmp-cell-self { background: rgba(201, 160, 99, 0.12); }
+      .cmp-cell-self {
+        background: rgba(201, 160, 99, 0.20);
+        border-left: 4px solid #C9A063;
+      }
       .cmp-src {
         display: block;
         width: 100%;
