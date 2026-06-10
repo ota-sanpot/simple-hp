@@ -23,3 +23,27 @@ python3 -m http.server 8765
 - フォント: Noto Sans JP のみ（serif 不可、日本語 italic 不可）
 - カラー: paper / kinari / gold / goldlt / sumi（design tokens は `<head>` 内 Tailwind config 参照）
 - ホスト: GitHub Pages（`main` ブランチ root）
+
+## ヒアリングフォーム（受注後に店舗へ送る）
+
+受注後ヒアリング用の Google フォームは `tools/create_hearing_form.gs` で自動生成する。
+
+### 生成手順（初回 or 再生成）
+
+1. https://script.google.com で「新しいプロジェクト」を作成
+2. `tools/create_hearing_form.gs` の内容を貼り付けて保存
+3. 関数 `create_hearing_form` を選んで「実行」（初回は権限の承認が必要）
+4. 実行ログの「回答URL」を控える → 受注した店舗に LINE 等で送付
+
+質問を直したいときは `.gs` を修正してコミット → 再実行（フォームは新規作成される。旧フォームは手動で削除）。
+
+### メール通知を ON にする（手動・1回だけ）
+
+Google の仕様でスクリプトから設定できないため、生成後に:
+
+1. 実行ログの「編集URL」からフォームを開く
+2. 「回答」タブ → 右上の︙ → 「新しい回答についてのメール通知を受け取る」にチェック
+
+### 運用フロー
+
+受注 → 回答URLを店舗に送付 → 回答がスプレッドシートに蓄積（＋メール通知）→ 写真を別途 LINE/メールで受領 → 制作開始
