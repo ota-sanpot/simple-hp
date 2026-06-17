@@ -70,6 +70,119 @@
       .reveal { opacity: 1; transform: none; transition: none; }
     }
 
+    /* ============================================================
+       BRUSH-UP（2026-06-17）— 紙質感・光・ヒーロー演出・価格カード
+       世界観は不変。奥行きと上品さを底上げするレイヤーのみ追加。
+       ============================================================ */
+
+    /* 紙のグレイン — 全面の薄い膜。テキストの可読性は損なわない低不透明度 */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      pointer-events: none;
+      opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      mix-blend-mode: multiply;
+    }
+    @media (prefers-reduced-motion: reduce) { .grain-overlay { opacity: .035; } }
+
+    /* やわらかな光のにじみ — フラット塗りに奥行きを与える（内容より背面 z:0） */
+    #hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 72% at 50% -8%, rgba(201,160,99,0.14), transparent 58%),
+        radial-gradient(80% 55% at 90% 6%, rgba(168,123,75,0.06), transparent 60%);
+    }
+    #concept::before, #contact::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(90% 55% at 50% -4%, rgba(201,160,99,0.13), transparent 60%),
+        radial-gradient(64% 48% at 12% 104%, rgba(201,160,99,0.06), transparent 60%);
+    }
+    #concept .section-wrap, #contact .section-wrap { position: relative; z-index: 1; }
+
+    /* ヒーローを段階的に立ち上げる（読み込み時のカスケード） */
+    @media (prefers-reduced-motion: no-preference) {
+      #hero .section-wrap > .reveal { transition-duration: 1.2s; }
+      #hero .section-wrap > .reveal:nth-child(1) { transition-delay: .04s; }
+      #hero .section-wrap > .reveal:nth-child(2) { transition-delay: .10s; }
+      #hero .section-wrap > .reveal:nth-child(3) { transition-delay: .16s; }
+      #hero .section-wrap > .reveal:nth-child(4) { transition-delay: .22s; }
+      #hero .section-wrap > .reveal:nth-child(5) { transition-delay: .30s; }
+      #hero .section-wrap > .reveal:nth-child(6) { transition-delay: .40s; }
+      #hero .section-wrap > .reveal:nth-child(7) { transition-delay: .52s; }
+      #hero .section-wrap > .reveal:nth-child(8) { transition-delay: .62s; }
+      #hero .section-wrap > .reveal:nth-child(9) { transition-delay: .70s; }
+    }
+
+    /* HERO eyebrow — モバイルで見切れないよう block 化して確実に折返す */
+    #hero .eyebrow {
+      display: block;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+    #hero .eyebrow > span { display: inline; line-height: 1.9; }
+    @media (max-width: 520px) {
+      #hero .eyebrow { letter-spacing: .22em; font-size: 10px; }
+    }
+
+    /* 価格カード — 買い切りの上質さを1枚で（数値・文言は不変） */
+    .price-card {
+      position: relative;
+      display: inline-flex;
+      align-items: stretch;
+      max-width: 100%;
+      background: linear-gradient(180deg, #FFFFFF, #FDFBF6);
+      border: 1px solid #D9CFBD;
+      box-shadow: 0 20px 52px -24px rgba(168,123,75,0.45);
+    }
+    .price-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #C9A063 18%, #A87B4B 50%, #C9A063 82%, transparent);
+    }
+    .price-cell {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 24px 34px;
+      text-align: center;
+    }
+    .price-cell + .price-cell { border-left: 1px solid #E6DCC9; }
+    .price-cap {
+      font-size: 10px;
+      letter-spacing: .32em;
+      color: #A87B4B;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .price-fig {
+      font-size: clamp(26px, 6.4vw, 32px);
+      font-weight: 500;
+      color: #1A1613;
+      letter-spacing: .01em;
+      line-height: 1;
+    }
+    .price-note {
+      font-size: 10px;
+      color: #6B5A4E;
+      margin-top: 8px;
+      letter-spacing: .04em;
+    }
+    @media (max-width: 380px) { .price-cell { padding: 20px 16px; } }
+
     /* セクション共通 — 章番号の透かしを置けるよう relative + overflow:hidden */
     .section-wrap {
       max-width: 920px;
@@ -642,6 +755,9 @@
 </head>
 <body>
 
+  <!-- 紙のグレイン（全面の薄い膜・装飾） -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
   <!-- === Sticky Header === -->
   <header class="site-header" id="siteHeader" aria-label="サイトヘッダー">
     <a href="#hero" class="brand" aria-label="OTA SANPOT / Simple Branding Web for Food">
@@ -680,16 +796,16 @@
           メニューと、地図と、ひとことの想い。それだけで、十分です。
         </p>
 
-        <div class="reveal" style="margin-top:56px;display:inline-flex;align-items:stretch;border:1px solid #A87B4B;background:#fff;">
-          <div style="padding:20px 28px;border-right:1px solid #A87B4B;text-align:center;min-width:140px;">
-            <div style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:8px;font-weight:500;">制作費</div>
-            <div style="font-size:28px;font-weight:500;color:#1A1613;letter-spacing:.02em;line-height:1;">¥25,000</div>
-            <div style="font-size:10px;color:#6B5A4E;margin-top:6px;letter-spacing:.05em;">税込・1回のみ</div>
+        <div class="reveal price-card" style="margin-top:56px;">
+          <div class="price-cell">
+            <div class="price-cap">制作費</div>
+            <div class="price-fig">¥25,000</div>
+            <div class="price-note">税込・1回のみ</div>
           </div>
-          <div style="padding:20px 28px;text-align:center;min-width:140px;">
-            <div style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:8px;font-weight:500;">月額</div>
-            <div style="font-size:28px;font-weight:500;color:#1A1613;letter-spacing:.02em;line-height:1;">¥0</div>
-            <div style="font-size:10px;color:#6B5A4E;margin-top:6px;letter-spacing:.05em;">保守費 一生 ¥0</div>
+          <div class="price-cell">
+            <div class="price-cap">月額</div>
+            <div class="price-fig">¥0</div>
+            <div class="price-note">保守費 一生 ¥0</div>
           </div>
         </div>
 
