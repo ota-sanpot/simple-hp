@@ -21,7 +21,8 @@ python3 -m http.server 8765
 ## デザイン制約
 
 - フォント: Noto Sans JP のみ（serif 不可、日本語 italic 不可）
-- カラー: paper / kinari / gold / goldlt / sumi（design tokens は `<head>` 内 Tailwind config 参照）
+- カラー: ink / paper / gold ほか（design tokens は `<head>` 内 `:root` の CSS 変数。2026-09-30 リデザインで Tailwind 廃止）
+- 写真: `assets/photo/`（Unsplash）、サンプル画面: `assets/works/`（pcN / spN.webp、サンプル更新時は撮り直す）
 - ホスト: GitHub Pages（`main` ブランチ root）
 
 ## ヒアリングフォーム（受注後に店舗へ送る）
