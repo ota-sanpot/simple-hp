@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ja" class="scroll-smooth scroll-pt-20">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Branding Web for Food｜飲食店のためのブランディング・ウェブ｜大田区サンポット</title>
   <meta name="description" content="Simple Branding Web for Food — 飲食店のための、1ページで完結するブランディング・ウェブ。制作費¥25,000、月額¥0。ブランドの第一印象を1枚で伝える、お店の"デジタル看板"を大田区サンポットが作ります。">
+  <meta name="theme-color" content="#14110E">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Simple Branding Web for Food｜大田区サンポット">
@@ -22,1412 +23,1628 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            sumi:   '#1A1613',
-            kinari: '#F5EFE4',
-            paper:  '#FBF8F1',
-            gold:   '#A87B4B',
-            goldlt: '#C9A063',
-            sub:    '#6B5A4E',
-            line:   '#D9CFBD',
-          },
-          fontFamily: {
-            sans: ['"Noto Sans JP"', 'sans-serif'],
-          },
-          letterSpacing: {
-            wider2: '.22em',
-            jumbo:  '.4em',
-          },
-        }
-      }
-    }
-  </script>
+  <link rel="preload" as="image" href="assets/photo/hero.webp">
 
   <style>
-    html, body { background: #FBF8F1; color: #1A1613; }
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-weight: 300;
-      font-feature-settings: "palt";
+    /* ============================================================
+       2026-09-30 全面リデザイン
+       夜の飲食店を思わせる 墨 × 金。実写の背景・角丸カード・端末モックで
+       「見てすぐ分かる」構成に。文言・価格・サンプル6件は不変。
+       ============================================================ */
+    :root {
+      --ink: #14110E;
+      --ink-2: #1D1814;
+      --ink-3: #2A231D;
+      --paper: #F7F3EC;
+      --paper-2: #EFE7DA;
+      --white: #FFFDF9;
+      --gold: #C9A063;
+      --gold-d: #A87B4B;
+      --gold-dd: #8A5A24;
+      --sub: #6B5A4E;
+      --mute: #9A8B7D;
+      --line: #E2D8C7;
+      --line-dk: rgba(255, 255, 255, 0.12);
+      --radius: 22px;
+      --radius-lg: 30px;
+      --shadow: 0 30px 60px -30px rgba(20, 17, 14, 0.28);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* ヘアライン */
-    .hairline { background: linear-gradient(90deg, transparent, #A87B4B 20%, #A87B4B 80%, transparent); height: 1px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-feature-settings: "palt";
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3, p, ul, ol, blockquote { margin: 0; }
+    h1, h2, h3, .sec-lead, .note-center { word-break: auto-phrase; text-wrap: pretty; }
+    h2, h3 { text-wrap: balance; }
+    ul, ol { padding: 0; list-style: none; }
 
-    /* スクロールリビール */
-    .reveal { opacity: 0; transform: translateY(24px); transition: all 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .container { padding: 0 40px; } }
 
-    /* JS失敗時・モーション抑制時のフォールバック */
+    section { position: relative; }
+    .sec { padding: 104px 0; }
+    @media (min-width: 768px) { .sec { padding: 144px 0; } }
+    .bg-paper { background: var(--paper); }
+    .bg-paper2 { background: var(--paper-2); }
+    .bg-white { background: var(--white); }
+    .bg-ink { background: var(--ink); color: #fff; }
+
+    /* ---------- セクション見出し ---------- */
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .28em;
+      color: var(--gold-d);
+      text-transform: uppercase;
+    }
+    .label::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+    .label .no { color: var(--mute); font-weight: 500; letter-spacing: .12em; }
+    .bg-ink .label, .on-dark .label { color: var(--gold); }
+    .bg-ink .label .no, .on-dark .label .no { color: rgba(255,255,255,.45); }
+    .sec-head { margin-bottom: 56px; }
+    .sec-head.center { text-align: center; }
+    .sec-head.center .label { justify-content: center; }
+    .sec-title {
+      margin-top: 18px;
+      font-size: clamp(28px, 4.2vw, 46px);
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: .02em;
+    }
+    .sec-lead {
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 2;
+      color: var(--sub);
+    }
+    .bg-ink .sec-lead, .on-dark .sec-lead { color: rgba(255,255,255,.66); }
+    .gold { color: var(--gold); }
+    .gold-d { color: var(--gold-d); }
+
+    /* ---------- ボタン ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 30px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-decoration: none;
+      transition: transform .3s var(--ease), background .3s ease, color .3s ease, box-shadow .3s ease, border-color .3s ease;
+      white-space: nowrap;
+    }
+    .btn .arr {
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 13px;
+      transition: transform .3s var(--ease);
+    }
+    .btn:hover .arr, .btn:focus-visible .arr { transform: translateX(4px); }
+    .btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 14px 34px -14px rgba(201,160,99,.75); }
+    .btn-gold .arr { background: var(--ink); color: var(--gold); }
+    .btn-gold:hover, .btn-gold:focus-visible { background: #D7B176; transform: translateY(-2px); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,.35); color: #fff; background: rgba(255,255,255,.04); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .btn-ghost .arr { background: rgba(255,255,255,.12); }
+    .btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-dark .arr { background: var(--gold); color: var(--ink); }
+    .btn-dark:hover, .btn-dark:focus-visible { background: var(--ink-3); transform: translateY(-2px); }
+    .btn-lg { min-height: 64px; padding: 0 40px; font-size: 15px; }
+
+    a:focus-visible, summary:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    /* ---------- リビール ---------- */
+    .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+    .js .reveal.visible { opacity: 1; transform: none; }
+    .js .reveal.d1 { transition-delay: .08s; }
+    .js .reveal.d2 { transition-delay: .16s; }
+    .js .reveal.d3 { transition-delay: .24s; }
+    .js .reveal.d4 { transition-delay: .32s; }
+    .js .reveal.d5 { transition-delay: .40s; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+      .js .reveal { opacity: 1; transform: none; transition: none; }
     }
 
     /* ============================================================
-       BRUSH-UP（2026-06-17）— 紙質感・光・ヒーロー演出・価格カード
-       世界観は不変。奥行きと上品さを底上げするレイヤーのみ追加。
+       HEADER
        ============================================================ */
-
-    /* 紙のグレイン — 全面の薄い膜。テキストの可読性は損なわない低不透明度 */
-    .grain-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 30;
-      pointer-events: none;
-      opacity: .05;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 140px 140px;
-      mix-blend-mode: multiply;
-    }
-    @media (prefers-reduced-motion: reduce) { .grain-overlay { opacity: .035; } }
-
-    /* やわらかな光のにじみ — フラット塗りに奥行きを与える（内容より背面 z:0） */
-    #hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(120% 72% at 50% -8%, rgba(201,160,99,0.14), transparent 58%),
-        radial-gradient(80% 55% at 90% 6%, rgba(168,123,75,0.06), transparent 60%);
-    }
-    #concept::before, #contact::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(90% 55% at 50% -4%, rgba(201,160,99,0.13), transparent 60%),
-        radial-gradient(64% 48% at 12% 104%, rgba(201,160,99,0.06), transparent 60%);
-    }
-    #concept .section-wrap, #contact .section-wrap { position: relative; z-index: 1; }
-
-    /* ヒーローを段階的に立ち上げる（読み込み時のカスケード） */
-    @media (prefers-reduced-motion: no-preference) {
-      #hero .section-wrap > .reveal { transition-duration: 1.2s; }
-      #hero .section-wrap > .reveal:nth-child(1) { transition-delay: .04s; }
-      #hero .section-wrap > .reveal:nth-child(2) { transition-delay: .10s; }
-      #hero .section-wrap > .reveal:nth-child(3) { transition-delay: .16s; }
-      #hero .section-wrap > .reveal:nth-child(4) { transition-delay: .22s; }
-      #hero .section-wrap > .reveal:nth-child(5) { transition-delay: .30s; }
-      #hero .section-wrap > .reveal:nth-child(6) { transition-delay: .40s; }
-      #hero .section-wrap > .reveal:nth-child(7) { transition-delay: .52s; }
-      #hero .section-wrap > .reveal:nth-child(8) { transition-delay: .62s; }
-      #hero .section-wrap > .reveal:nth-child(9) { transition-delay: .70s; }
-    }
-
-    /* HERO eyebrow — モバイルで見切れないよう block 化して確実に折返す */
-    #hero .eyebrow {
-      display: block;
-      max-width: 100%;
-      white-space: normal;
-      text-align: center;
-    }
-    #hero .eyebrow > span { display: inline; line-height: 1.9; }
-    @media (max-width: 520px) {
-      #hero .eyebrow { letter-spacing: .22em; font-size: 10px; }
-    }
-
-    /* 価格カード — 買い切りの上質さを1枚で（数値・文言は不変） */
-    .price-card {
-      position: relative;
-      display: inline-flex;
-      align-items: stretch;
-      max-width: 100%;
-      background: linear-gradient(180deg, #FFFFFF, #FDFBF6);
-      border: 1px solid #D9CFBD;
-      box-shadow: 0 20px 52px -24px rgba(168,123,75,0.45);
-    }
-    .price-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #C9A063 18%, #A87B4B 50%, #C9A063 82%, transparent);
-    }
-    .price-cell {
-      flex: 1 1 0;
-      min-width: 0;
-      padding: 24px 34px;
-      text-align: center;
-    }
-    .price-cell + .price-cell { border-left: 1px solid #E6DCC9; }
-    .price-cap {
-      font-size: 10px;
-      letter-spacing: .32em;
-      color: #A87B4B;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    .price-fig {
-      font-size: clamp(26px, 6.4vw, 32px);
-      font-weight: 500;
-      color: #1A1613;
-      letter-spacing: .01em;
-      line-height: 1;
-    }
-    .price-note {
-      font-size: 10px;
-      color: #6B5A4E;
-      margin-top: 8px;
-      letter-spacing: .04em;
-    }
-    @media (max-width: 380px) { .price-cell { padding: 20px 16px; } }
-
-    /* セクション共通 — 章番号の透かしを置けるよう relative + overflow:hidden */
-    .section-wrap {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 96px 24px;
-      position: relative;
-      z-index: 1;
-    }
-    @media (min-width: 768px) { .section-wrap { padding: 128px 32px; } }
-
-    /* HERO は上を詰める（ロゴと sticky header があるので余白を抑える） */
-    #hero .section-wrap { padding-top: 20px; }
-    @media (min-width: 768px) { #hero .section-wrap { padding-top: 32px; } }
-    section { position: relative; overflow: hidden; }
-
-    /* ラベル（small caps風） — 編集デザインに寄せる */
-    .eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .4em;
-      color: #A87B4B;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .eyebrow .roman {
-      font-weight: 400;
-      letter-spacing: .18em;
-      color: rgba(168, 123, 75, 0.7);
-      font-style: italic;
-    }
-    #concept .eyebrow .roman,
-    #contact .eyebrow .roman { color: rgba(201, 160, 99, 0.75); }
-    .eyebrow .sep { display: inline-block; width: 14px; }
-
-    /* HERO の追加 Latin ライン */
-    .prologue {
-      margin-top: 10px;
-      font-size: 10px;
-      letter-spacing: .35em;
-      color: rgba(168, 123, 75, 0.7);
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    /* 章番号 透かし */
-    .chapter-mark {
-      position: absolute;
-      top: 36px;
-      right: 6%;
-      font-size: clamp(120px, 18vw, 220px);
-      font-weight: 100;
-      color: rgba(168, 123, 75, 0.06);
-      letter-spacing: .02em;
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-      font-style: italic;
-    }
-    #concept .chapter-mark { color: rgba(201, 160, 99, 0.05); }
-    @media (max-width: 640px) {
-      .chapter-mark { top: 24px; right: 4%; opacity: .9; }
-    }
-
-    /* 章のセクションタイトルは透かしより前面に */
-    section h2, section .eyebrow, section h1 { position: relative; z-index: 1; }
-
-    /* 装飾オーナメント（セクション間） */
-    .ornament {
-      display: flex; align-items: center; justify-content: center;
-      gap: 14px;
-      max-width: 120px;
-      margin: 0 auto;
-      padding: 32px 0;
-      background: #FBF8F1;
-    }
-    .ornament-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #C9A063 50%, transparent);
-    }
-    .ornament-mark {
-      color: #A87B4B;
-      font-size: 10px;
-      line-height: 1;
-      opacity: .8;
-    }
-    .ornament.on-dark { background: #1A1613; }
-    .ornament.on-dark .ornament-mark { color: #C9A063; }
-    .ornament.on-kinari { background: #F5EFE4; }
-
-    /* セクションタイトル 全体的に少しゆとり */
-    section h2 {
-      letter-spacing: .06em !important;
-      line-height: 1.7 !important;
-    }
-
-    /* CTAボタン */
-    .btn-primary, .btn-outline, .btn-gold {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: #1A1613; color: #fff;
-      padding: 16px 36px;
-      font-size: 13px; font-weight: 500; letter-spacing: .2em;
-      text-decoration: none;
-      transition: background .2s ease, transform .2s ease;
-    }
-    .btn-primary:hover, .btn-primary:focus-visible { background: #2C2620; transform: translateY(-1px); }
-    .btn-outline {
-      display: inline-flex; align-items: center; justify-content: center;
-      border: 1px solid #1A1613; color: #1A1613;
-      padding: 14px 32px;
-      font-size: 13px; font-weight: 500; letter-spacing: .2em;
-      text-decoration: none;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .btn-outline:hover, .btn-outline:focus-visible {
-      background: #1A1613; color: #fff; transform: translateY(-1px);
-    }
-    .btn-gold {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: #C9A063; color: #1A1613;
-      padding: 18px 44px;
-      font-size: 14px; font-weight: 500; letter-spacing: .2em;
-      text-decoration: none;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .btn-gold:hover, .btn-gold:focus-visible {
-      background: #A87B4B; color: #fff; transform: translateY(-1px);
-    }
-
-    /* 矢印スライド microinteraction */
-    .arrow-anim {
-      display: inline-block;
-      margin-left: 6px;
-      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .btn-primary:hover .arrow-anim,
-    .btn-outline:hover .arrow-anim,
-    .btn-gold:hover .arrow-anim,
-    .showcase-card:hover .arrow-anim,
-    .btn-primary:focus-visible .arrow-anim,
-    .btn-outline:focus-visible .arrow-anim,
-    .btn-gold:focus-visible .arrow-anim {
-      transform: translateX(4px);
-    }
-
-    /* SHOWCASEカード */
-    .showcase-card {
-      transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .5s ease;
-    }
-    .showcase-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 48px -12px rgba(26, 22, 19, 0.14);
-    }
-
-    /* スマホベゼル風フレーム */
-    .phone-bezel {
-      position: relative;
-      border-radius: 14px;
-      border: 1.5px solid #1A1613;
-      padding: 6px;
-      background: #1A1613;
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.04),
-        0 1px 0 rgba(255,255,255,0.04);
-      overflow: hidden;
-    }
-    .phone-bezel::before {
-      content: "";
-      position: absolute;
-      top: 9px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30%;
-      height: 4px;
-      background: #0A0907;
-      border-radius: 3px;
-      z-index: 2;
-    }
-    .phone-bezel .phone-screen {
-      position: relative;
-      aspect-ratio: 9/16;
-      background: #FBF8F1;
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    /* iframe は標準スマホ幅(390px)で描画し、枠サイズに縮小表示する
-       （狭い実幅でレンダリングするとサイト側が崩れるため） */
-    .phone-bezel .phone-screen iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 390px;
-      height: 694px; /* 390 * 16/9 ≒ 693 を満たす高さ */
-      border: 0;
-      pointer-events: none;
-      transform-origin: top left;
-    }
-
-    /* FAQアコーディオン */
-    details summary::-webkit-details-marker { display: none; }
-    details[open] summary > span:last-child { transform: rotate(45deg); transition: transform .2s ease; }
-    details summary > span:last-child { display: inline-block; transition: transform .2s ease; }
-
-    /* キーボードフォーカスリング（アクセシビリティ） */
-    a:focus-visible, summary:focus-visible, button:focus-visible {
-      outline: 2px solid #A87B4B;
-      outline-offset: 6px;
-    }
-
-    /* === Sticky Header === */
     .site-header {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
+      inset: 0 0 auto 0;
+      z-index: 60;
+      transition: background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.is-scrolled {
+      background: rgba(20, 17, 14, 0.82);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-bottom-color: rgba(255,255,255,.08);
+    }
+    .header-in {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
-      background: rgba(251, 248, 241, 0);
-      backdrop-filter: blur(0);
-      -webkit-backdrop-filter: blur(0);
-      border-bottom: 1px solid transparent;
-      z-index: 50;
-      transition: background .35s ease, backdrop-filter .35s ease, border-color .35s ease, opacity .35s ease, transform .35s ease;
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
+      gap: 24px;
+      height: 76px;
     }
-    .site-header.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-      background: rgba(251, 248, 241, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid #D9CFBD;
-    }
-    .site-header .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-      font-size: 12px;
-      letter-spacing: .14em;
-      color: #1A1613;
-      text-decoration: none;
-    }
-    .site-header .brand .brand-lat {
+    .brand { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; }
+    .brand img { height: 40px; width: auto; }
+    .brand .brand-by {
       font-size: 10px;
       letter-spacing: .26em;
-      color: #A87B4B;
+      color: rgba(255,255,255,.55);
+      padding-left: 14px;
+      border-left: 1px solid rgba(255,255,255,.2);
+      line-height: 1.5;
       font-weight: 500;
     }
-    .site-header .brand .brand-sep {
-      color: #A87B4B;
-      margin: 0 10px;
-      opacity: .6;
+    .gnav { display: none; align-items: center; gap: 30px; }
+    .gnav a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.82);
+      text-decoration: none;
+      position: relative;
+      padding: 6px 0;
     }
-    .site-header .brand .brand-logo {
-      height: 32px;
-      width: auto;
+    .gnav a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s var(--ease);
+    }
+    .gnav a:hover { color: #fff; }
+    .gnav a:hover::after { transform: scaleX(1); }
+    .header-cta { min-height: 44px; padding: 0 22px; font-size: 13px; letter-spacing: .1em; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .menu-btn {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.25);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      padding: 0;
+    }
+    .menu-btn span, .menu-btn span::before, .menu-btn span::after {
       display: block;
+      width: 16px;
+      height: 1.5px;
+      background: currentColor;
+      position: relative;
+      transition: transform .3s var(--ease), background .3s ease;
     }
-    .site-header .nav-cta {
+    .menu-btn span::before, .menu-btn span::after { content: ""; position: absolute; left: 0; }
+    .menu-btn span::before { top: -5px; }
+    .menu-btn span::after { top: 5px; }
+    .menu-open .menu-btn span { background: transparent; }
+    .menu-open .menu-btn span::before { transform: translateY(5px) rotate(45deg); }
+    .menu-open .menu-btn span::after { transform: translateY(-5px) rotate(-45deg); }
+    .mobile-nav {
+      position: fixed;
+      inset: 76px 0 auto 0;
+      z-index: 59;
+      background: rgba(20,17,14,.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 12px 24px 32px;
+      transform: translateY(-12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease, transform .3s var(--ease);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .menu-open .mobile-nav { opacity: 1; transform: none; pointer-events: auto; }
+    .menu-open .site-header { background: rgba(20,17,14,.97); }
+    .mobile-nav a {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 4px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .mobile-nav a span { font-size: 11px; letter-spacing: .2em; color: var(--gold); font-weight: 500; }
+    .mobile-nav a.btn { margin-top: 24px; width: 100%; justify-content: center; padding: 0 30px; border-bottom: 0; color: var(--ink); font-weight: 700; }
+    .mobile-nav a.btn .arr { color: var(--gold); font-size: 13px; letter-spacing: 0; }
+    .menu-open .fab { visibility: hidden; }
+    @media (min-width: 1024px) {
+      .gnav { display: flex; }
+      .menu-btn, .mobile-nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .brand .brand-by { display: none; }
+      .brand img { height: 34px; }
+      .header-cta { display: none; }
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      color: #fff;
+      background: var(--ink);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url("assets/photo/hero.webp") center / cover no-repeat;
+      transform: scale(1.06);
+      animation: heroZoom 14s var(--ease) forwards;
+    }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(100deg, rgba(20,17,14,.96) 0%, rgba(20,17,14,.86) 38%, rgba(20,17,14,.45) 70%, rgba(20,17,14,.62) 100%),
+        linear-gradient(180deg, rgba(20,17,14,.35) 0%, transparent 30%, transparent 70%, rgba(20,17,14,.9) 100%);
+    }
+    @media (max-width: 1023px) {
+      .hero::after { background: linear-gradient(180deg, rgba(20,17,14,.82) 0%, rgba(20,17,14,.88) 55%, rgba(20,17,14,.97) 100%); }
+      .hero-bg { background-position: 60% center; }
+    }
+    @media (max-width: 560px) {
+      .hero .hero-eyebrow { font-size: 11px; letter-spacing: .06em; padding: 7px 14px; }
+    }
+    .hero-in {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 56px;
+      align-items: center;
+      padding-top: 128px;
+      padding-bottom: 88px;
+    }
+    @media (min-width: 1024px) {
+      .hero-in { grid-template-columns: 1.05fr .95fr; gap: 40px; padding-top: 140px; padding-bottom: 110px; }
+    }
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      border: 1px solid #1A1613;
-      color: #1A1613;
-      text-decoration: none;
-      padding: 7px 16px;
-      font-size: 11px;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,160,99,.45);
+      background: rgba(201,160,99,.08);
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: .22em;
-      transition: background .2s ease, color .2s ease;
+      letter-spacing: .12em;
+      color: var(--gold);
     }
-    .site-header .nav-cta:hover, .site-header .nav-cta:focus-visible {
-      background: #1A1613; color: #fff;
-    }
-    @media (max-width: 480px) {
-      .site-header .brand .brand-lat { display: none; }
-      .site-header .brand .brand-sep { display: none; }
-    }
-
-    /* === HERO 縦書き Latin サイドラベル === */
-    .hero-side-label {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      writing-mode: vertical-rl;
-      font-size: 10px;
-      letter-spacing: .5em;
-      color: rgba(168, 123, 75, 0.6);
-      font-weight: 500;
-      text-transform: uppercase;
-      pointer-events: none;
-      user-select: none;
-      z-index: 2;
-      white-space: nowrap;
-    }
-    @media (max-width: 767px) { .hero-side-label { display: none; } }
-
-    /* === CONCEPT 装飾 === */
-    .concept-quote-glyph {
-      position: absolute;
-      top: 60px;
-      left: 6%;
-      font-size: clamp(180px, 24vw, 280px);
-      line-height: 1;
-      color: rgba(201, 160, 99, 0.08);
-      font-weight: 300;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-    }
-    .concept-quote {
-      max-width: 540px;
-      margin: 48px auto 0;
-      font-size: 14px;
-      line-height: 2.6;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.78);
-      font-style: normal;
-      border: 0;
-      padding: 0;
-      quotes: none;
-    }
-    .concept-quote::before, .concept-quote::after { content: none; }
-    .concept-editor-note {
+    .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(201,160,99,.2); }
+    .hero h1 {
       margin-top: 28px;
-      font-size: 10px;
-      letter-spacing: .35em;
-      color: rgba(201, 160, 99, 0.55);
-      font-style: italic;
-      text-transform: uppercase;
+      font-size: clamp(36px, 5.2vw, 66px);
+      font-weight: 900;
+      line-height: 1.28;
+      letter-spacing: .01em;
     }
-    .concept-emph-underline {
+    .hero h1 .em { color: var(--gold); }
+    .hero h1 .ln { white-space: nowrap; }
+    .hero-lead {
+      margin-top: 28px;
+      font-size: clamp(14px, 1.5vw, 16px);
+      line-height: 2.1;
+      color: rgba(255,255,255,.78);
+      max-width: 520px;
+    }
+    .hero-lead strong { color: #fff; font-weight: 700; }
+    .hero-stats {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 560px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+    .hero-stat { padding: 18px 18px 16px; }
+    .hero-stat + .hero-stat { border-left: 1px solid rgba(255,255,255,.12); }
+    .hero-stat .cap { font-size: 11px; font-weight: 500; letter-spacing: .14em; color: var(--gold); }
+    .hero-stat .fig { margin-top: 6px; font-size: clamp(22px, 3vw, 32px); font-weight: 700; line-height: 1.1; letter-spacing: .01em; }
+    .hero-stat .fig small { font-size: .5em; font-weight: 500; margin-left: 2px; }
+    .hero-stat .note { margin-top: 6px; font-size: 11px; color: rgba(255,255,255,.6); line-height: 1.5; }
+    @media (max-width: 420px) {
+      .hero-stat { padding: 14px 10px 12px; }
+      .hero-stat .cap { font-size: 10px; letter-spacing: .06em; }
+      .hero-stat .note { font-size: 10px; }
+    }
+    .hero-cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .hero-free { margin-top: 16px; font-size: 12px; letter-spacing: .12em; color: rgba(255,255,255,.55); }
+
+    /* 端末モックアップ */
+    .devices { position: relative; max-width: 620px; margin: 0 auto; width: 100%; }
+    .laptop {
+      position: relative;
+      border-radius: 14px 14px 0 0;
+      background: #0b0a09;
+      padding: 12px 12px 0;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 50px 90px -40px rgba(0,0,0,.9);
+    }
+    .laptop-screen { border-radius: 4px 4px 0 0; overflow: hidden; aspect-ratio: 16 / 10; background: #222; }
+    .laptop-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .laptop-base {
+      height: 14px;
+      margin: 0 -7%;
+      background: linear-gradient(180deg, #3a332c, #1a1613);
+      border-radius: 0 0 14px 14px;
+      position: relative;
+    }
+    .laptop-base::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 0;
+      width: 18%; height: 5px;
+      transform: translateX(-50%);
+      background: #0e0c0a;
+      border-radius: 0 0 6px 6px;
+    }
+    .phone {
+      position: absolute;
+      right: -2%;
+      bottom: -9%;
+      width: 27%;
+      border-radius: 22px;
+      padding: 7px;
+      background: #0b0a09;
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 40px 70px -30px rgba(0,0,0,.95);
+    }
+    .phone-screen { border-radius: 16px; overflow: hidden; aspect-ratio: 9 / 18; background: #222; }
+    .phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .devices .float-tag {
+      position: absolute;
+      left: -2%;
+      top: -7%;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 16px;
+      background: rgba(255,253,249,.96);
+      color: var(--ink);
+      box-shadow: 0 24px 50px -20px rgba(0,0,0,.6);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      animation: floaty 6s ease-in-out infinite;
+      z-index: 3;
+    }
+    .float-tag .ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--gold); }
+    .float-tag small { display: block; font-size: 10px; font-weight: 500; color: var(--sub); letter-spacing: .08em; }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @media (prefers-reduced-motion: reduce) { .hero-bg, .devices .float-tag { animation: none; transform: none; } }
+    @media (max-width: 1023px) { .devices { max-width: 520px; margin-bottom: 24px; } }
+    @media (max-width: 560px) { .devices .float-tag { top: -12%; left: 0; padding: 9px 14px; font-size: 11px; } }
+
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      z-index: 3;
+      transform: translateX(-50%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: rgba(255,255,255,.5);
+    }
+    .scroll-cue i { width: 1px; height: 40px; background: linear-gradient(var(--gold), transparent); animation: cue 2.2s ease-in-out infinite; transform-origin: top; }
+    @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+    @media (min-width: 1024px) { .scroll-cue { display: flex; } }
+
+    /* ============================================================
+       SHOWCASE
+       ============================================================ */
+    .works { display: grid; grid-template-columns: 1fr; gap: 28px; }
+    @media (min-width: 700px) { .works { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .works { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
+    .work {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: transform .5s var(--ease), box-shadow .5s ease, border-color .3s ease;
+    }
+    .work:hover, .work:focus-visible { transform: translateY(-6px); box-shadow: var(--shadow); border-color: transparent; }
+    .work-visual {
+      position: relative;
+      padding: 22px 22px 0;
+      background: linear-gradient(160deg, var(--paper-2), #E4D9C6);
+      overflow: hidden;
+    }
+    .browser {
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 20px 40px -24px rgba(20,17,14,.5);
+    }
+    .browser-bar { display: flex; gap: 5px; padding: 8px 10px; background: #F1ECE4; }
+    .browser-bar i { width: 7px; height: 7px; border-radius: 50%; background: #D5CBBB; }
+    .browser-shot { aspect-ratio: 16 / 10; overflow: hidden; }
+    .browser-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .8s var(--ease); }
+    .work:hover .browser-shot img { transform: scale(1.04); }
+    .work-phone {
+      position: absolute;
+      right: 16px;
+      bottom: -18px;
+      width: 25%;
+      padding: 4px;
+      border-radius: 14px;
+      background: var(--ink);
+      box-shadow: 0 20px 40px -18px rgba(20,17,14,.7);
+      transition: transform .6s var(--ease);
+    }
+    .work:hover .work-phone { transform: translateY(-10px); }
+    .work-phone div { border-radius: 10px; overflow: hidden; aspect-ratio: 9 / 17; }
+    .work-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .work-body { padding: 24px 26px 26px; display: flex; flex-direction: column; flex: 1; }
+    .work-tag { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: .18em; color: var(--gold-d); }
+    .work-tag .pill { padding: 3px 10px; border-radius: 999px; background: var(--paper-2); color: var(--ink); letter-spacing: .06em; font-weight: 500; }
+    .work-title { margin-top: 12px; font-size: 18px; font-weight: 700; }
+    .work-desc { margin-top: 8px; font-size: 13px; color: var(--sub); line-height: 1.9; flex: 1; }
+    .work-link {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+    .work-link .arr {
+      display: grid; place-items: center;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--gold);
+      transition: transform .35s var(--ease), background .3s ease;
+    }
+    .work:hover .work-link .arr { transform: translateX(4px) rotate(-45deg); background: var(--gold); color: var(--ink); }
+    .note-center { margin-top: 48px; text-align: center; font-size: 13px; color: var(--gold-d); letter-spacing: .06em; }
+
+    /* ============================================================
+       PAIN
+       ============================================================ */
+    .pain-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+    @media (min-width: 1024px) {
+      .pain-grid { grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: start; }
+      .pain-grid .sec-head { position: sticky; top: 130px; margin-bottom: 0; }
+    }
+    .pain-list { display: grid; gap: 16px; }
+    .pain-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: center;
+      padding: 26px 28px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--line);
+      transition: transform .4s var(--ease), border-color .3s ease;
+    }
+    .pain-item:hover { transform: translateX(6px); border-color: var(--gold); }
+    .pain-no {
+      display: grid; place-items: center;
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: var(--ink);
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .pain-item p { font-size: 15px; font-weight: 500; line-height: 1.85; }
+    @media (max-width: 560px) {
+      .pain-item { padding: 20px; gap: 16px; align-items: start; }
+      .pain-no { width: 40px; height: 40px; border-radius: 12px; font-size: 13px; }
+      .pain-item p { font-size: 14px; }
+    }
+    .pain-arrow {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold-d);
+    }
+    .pain-arrow i { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+
+    /* ============================================================
+       CONCEPT
+       ============================================================ */
+    .concept { background: var(--ink); color: #fff; overflow: hidden; }
+    .concept-grid { display: grid; grid-template-columns: 1fr; }
+    @media (min-width: 1024px) { .concept-grid { grid-template-columns: 1fr 1fr; min-height: 720px; } }
+    .concept-photo { position: relative; min-height: 360px; }
+    .concept-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .concept-photo::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(20,17,14,0) 50%, rgba(20,17,14,1) 100%), linear-gradient(0deg, rgba(20,17,14,.5), transparent 40%);
+    }
+    @media (max-width: 1023px) {
+      .concept-photo::after { background: linear-gradient(180deg, rgba(20,17,14,0) 40%, rgba(20,17,14,1) 100%); }
+    }
+    .concept-text { padding: 72px 24px 104px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+    @media (min-width: 768px) { .concept-text { padding: 104px 64px 120px; } }
+    .concept-glyph {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 220px;
+      line-height: 1;
+      font-weight: 900;
+      color: rgba(201,160,99,.08);
+      pointer-events: none;
+      user-select: none;
+    }
+    .concept h2 { margin-top: 22px; font-size: clamp(32px, 4.6vw, 54px); font-weight: 900; line-height: 1.4; }
+    .concept h2 .kanban {
+      color: var(--gold);
       position: relative;
       display: inline-block;
     }
-    .concept-emph-underline::after {
+    .concept h2 .kanban::after {
       content: "";
       position: absolute;
-      left: 0; right: 0; bottom: -6px;
-      height: 1px;
-      background: #C9A063;
-      opacity: .9;
+      left: 0; right: 0; bottom: .06em;
+      height: .14em;
+      background: rgba(201,160,99,.3);
+      z-index: -1;
     }
+    .concept-quote {
+      margin-top: 40px;
+      padding: 4px 0 4px 24px;
+      border-left: 2px solid var(--gold);
+      font-size: 16px;
+      line-height: 2.3;
+      color: rgba(255,255,255,.86);
+    }
+    .concept-note { margin-top: 18px; padding-left: 26px; font-size: 11px; letter-spacing: .3em; color: rgba(201,160,99,.7); text-transform: uppercase; }
+    .concept-body {
+      margin-top: 40px;
+      padding: 26px 28px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--line-dk);
+      font-size: 14px;
+      line-height: 2.1;
+      color: rgba(255,255,255,.7);
+    }
+    .concept-body strong { color: var(--gold); font-weight: 700; }
 
-    /* === Footer === */
-    .site-footer {
-      background: #0F0D0B;
-      border-top: 1px solid rgba(201, 160, 99, 0.35);
-      color: rgba(255, 255, 255, 0.55);
-      padding: 64px 24px 48px;
-      font-size: 11px;
-      letter-spacing: .1em;
+    /* ============================================================
+       VALUE
+       ============================================================ */
+    .values { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 640px) { .values { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .values { grid-template-columns: repeat(4, 1fr); } }
+    .value {
+      position: relative;
+      padding: 34px 28px 32px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: transform .45s var(--ease), box-shadow .45s ease;
     }
-    .site-footer .footer-grid {
-      max-width: 920px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
+    .value:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .value .num {
+      position: absolute;
+      top: 18px; right: 22px;
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--paper-2);
     }
-    @media (min-width: 768px) {
-      .site-footer .footer-grid {
-        grid-template-columns: 1fr 2fr;
-        gap: 64px;
-      }
+    .ic-box {
+      position: relative;
+      display: grid; place-items: center;
+      width: 60px; height: 60px;
+      border-radius: 18px;
+      background: var(--ink);
+      color: var(--gold);
     }
-    .site-footer .brand-block .brand-name {
-      font-size: 12px;
-      letter-spacing: .28em;
-      color: #C9A063;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    .site-footer .brand-block .brand-tag {
-      font-size: 11px;
-      line-height: 1.9;
-      color: rgba(255, 255, 255, 0.55);
-      letter-spacing: .08em;
-    }
-    .site-footer .index-block .index-label {
-      font-size: 10px;
-      letter-spacing: .4em;
-      color: rgba(201, 160, 99, 0.6);
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .site-footer .index-block .index-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .site-footer .index-block .index-list a {
-      color: rgba(255, 255, 255, 0.7);
-      text-decoration: none;
-      font-size: 11px;
-      letter-spacing: .14em;
-      transition: color .2s ease;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-    .site-footer .index-block .index-list a:hover,
-    .site-footer .index-block .index-list a:focus-visible {
-      color: #C9A063;
-    }
-    .site-footer .index-block .index-list .num {
-      color: rgba(201, 160, 99, 0.7);
-      font-size: 10px;
-      letter-spacing: .2em;
-      font-style: italic;
-    }
-    .site-footer .footer-meta {
-      max-width: 920px;
-      margin: 40px auto 0;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 24px;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.45);
-    }
-    .site-footer .footer-meta a {
-      color: #C9A063;
-      text-decoration: none;
-    }
-    .site-footer .footer-meta a:hover, .site-footer .footer-meta a:focus-visible {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+    .ic-box svg { width: 28px; height: 28px; }
+    .value h3 { margin-top: 26px; font-size: 20px; font-weight: 700; letter-spacing: .02em; }
+    .value p { margin-top: 12px; font-size: 13px; line-height: 2; color: var(--sub); }
+    .value.is-feature { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .value.is-feature .num { color: rgba(255,255,255,.06); }
+    .value.is-feature .ic-box { background: var(--gold); color: var(--ink); }
+    .value.is-feature p { color: rgba(255,255,255,.68); }
+    .value.is-feature h3 .gold { color: var(--gold); }
 
-    /* === COMPARISON 比較表 === */
+    /* ============================================================
+       SCOPE
+       ============================================================ */
+    .scope-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 980px; margin: 0 auto; }
+    @media (min-width: 768px) { .scope-grid { grid-template-columns: 1.1fr .9fr; } }
+    .scope-card { padding: 40px 36px; border-radius: var(--radius-lg); }
+    @media (max-width: 560px) { .scope-card { padding: 32px 24px; } }
+    .scope-card.in { background: var(--ink); color: #fff; box-shadow: var(--shadow); }
+    .scope-card.out { background: var(--white); border: 1px solid var(--line); }
+    .scope-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .scope-card.in .scope-head { border-bottom-color: var(--line-dk); }
+    .scope-head h3 { font-size: 20px; font-weight: 700; }
+    .scope-head span { font-size: 11px; font-weight: 700; letter-spacing: .22em; color: var(--gold); }
+    .scope-card.out .scope-head span { color: var(--mute); }
+    .scope-list { margin-top: 10px; }
+    .scope-list li { display: flex; align-items: center; gap: 14px; padding: 13px 0; font-size: 15px; font-weight: 500; }
+    .scope-list li + li { border-top: 1px dashed var(--line-dk); }
+    .scope-card.out .scope-list li { color: var(--sub); font-weight: 400; }
+    .scope-card.out .scope-list li + li { border-top-color: var(--line); }
+    .chk, .xmk { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; }
+    .chk { background: var(--gold); color: var(--ink); }
+    .xmk { background: var(--paper-2); color: var(--mute); }
+    .chk svg, .xmk svg { width: 13px; height: 13px; }
+    .scope-more { margin-top: 22px; padding: 16px 18px; border-radius: 14px; background: var(--paper); font-size: 13px; color: var(--gold-dd); line-height: 1.8; }
+
+    /* ============================================================
+       USE CASES
+       ============================================================ */
+    .uses { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 700px) { .uses { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .uses { grid-template-columns: repeat(3, 1fr); } }
+    .use {
+      padding: 32px 28px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--line);
+      transition: transform .45s var(--ease), box-shadow .45s ease, border-color .3s;
+    }
+    .use:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: transparent; }
+    .use-top { display: flex; align-items: center; justify-content: space-between; }
+    .use-top .ic-box { width: 52px; height: 52px; border-radius: 16px; }
+    .use-top .ic-box svg { width: 24px; height: 24px; }
+    .use-letter { font-size: 40px; font-weight: 900; line-height: 1; color: var(--paper-2); }
+    .use-kicker { margin-top: 24px; font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--gold-d); }
+    .use h3 { margin-top: 6px; font-size: 18px; font-weight: 700; line-height: 1.6; }
+    .use p { margin-top: 12px; font-size: 13px; line-height: 1.95; color: var(--sub); }
+
+    /* ============================================================
+       COMPARISON
+       ============================================================ */
+    .cmp-wrap { max-width: 1000px; margin: 0 auto; }
     .cmp {
-      max-width: 880px;
-      margin: 0 auto;
-      border: 1px solid #D9CFBD;
-      background: #FBF8F1;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 0 12px 12px;
     }
-    .cmp-head {
-      display: grid;
-      grid-template-columns: 1.25fr 1.1fr 1fr 1fr;
-      border-bottom: 1px solid #1A1613;
-    }
+    .cmp-row { display: grid; grid-template-columns: 1.15fr 1.2fr 1fr 1fr; }
+    .cmp-row + .cmp-row .cmp-label, .cmp-row + .cmp-row .cmp-cell:not(.cmp-cell-self) { border-top: 1px solid var(--line); }
+    .cmp-row + .cmp-row .cmp-cell-self { border-top: 1px solid rgba(201,160,99,.25); }
     .cmp-head > div {
-      padding: 18px 14px 16px;
+      padding: 28px 12px 22px;
       text-align: center;
-      font-size: 12px;
-      font-weight: 500;
-      color: #1A1613;
+      font-size: 13px;
+      font-weight: 700;
       line-height: 1.5;
-      letter-spacing: .03em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      color: var(--sub);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .cmp-head .cmp-col-self {
-      background: #1A1613;
+      background: var(--ink);
       color: #fff;
-      border-left: 2px solid #C9A063;
-      border-right: 2px solid #C9A063;
-      border-top: 2px solid #C9A063;
+      border-radius: 0 0 0 0;
+      margin-top: -14px;
+      padding-top: 38px;
+      border-radius: 20px 20px 0 0;
     }
-    .cmp-head .cmp-col-self .cmp-h-brand { color: #fff; font-weight: 700; font-size: 13px; }
     .cmp-self-tag {
-      font-size: 9px;
-      letter-spacing: .3em;
-      color: #C9A063;
-      margin-bottom: 6px;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      margin-bottom: 8px;
     }
-    .cmp-row {
-      display: grid;
-      grid-template-columns: 1.25fr 1.1fr 1fr 1fr;
-      border-top: 1px solid #E6DCC9;
-    }
-    .cmp-head + .cmp-row { border-top: 0; }
+    .cmp-h-brand { font-size: 15px; font-weight: 700; color: #fff; }
     .cmp-label {
-      padding: 20px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #1A1613;
+      padding: 22px 16px;
+      font-size: 14px;
+      font-weight: 700;
       line-height: 1.5;
-      display: flex;
-      align-items: center;
-      background: #F5EFE4;
+      display: flex; align-items: center;
     }
     .cmp-cell {
-      padding: 18px 14px;
+      padding: 20px 12px;
       font-size: 13px;
-      color: #6B5A4E;
       line-height: 1.7;
+      color: var(--sub);
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 4px;
     }
-    .cmp-cell strong {
-      font-size: 18px;
-      font-weight: 500;
-      color: #1A1613;
-      letter-spacing: .01em;
-    }
-    .cmp-cell strong.cmp-week { font-size: 15px; }
-    .cmp-cell-self {
-      background: rgba(201, 160, 99, 0.24);
-      color: #1A1613;
-      border-left: 2px solid #C9A063;
-      border-right: 2px solid #C9A063;
-    }
-    .cmp-cell-self strong { color: #1A1613; font-weight: 700; }
-    .cmp-cell-self .cmp-mark { color: #8A5A24; }
-    .cmp-cell-self .cmp-note { color: #8A5A24; }
-    .cmp-row:last-child .cmp-cell-self { border-bottom: 2px solid #C9A063; }
-    .cmp-mark { font-size: 18px; color: #A87B4B; font-weight: 500; line-height: 1; }
-    .cmp-note { font-size: 10px; color: #A87B4B; letter-spacing: .02em; line-height: 1.6; }
+    .cmp-cell strong { font-size: 22px; font-weight: 900; color: var(--ink); letter-spacing: .01em; }
+    .cmp-cell strong.cmp-week { font-size: 18px; }
+    .cmp-cell-self { background: var(--ink); color: #fff; font-weight: 700; }
+    .cmp-cell-self strong { color: var(--gold); }
+    .cmp-row:last-child .cmp-cell-self { border-radius: 0 0 20px 20px; padding-bottom: 26px; }
+    .cmp-mark { font-size: 20px; color: var(--gold-d); font-weight: 700; line-height: 1; }
+    .cmp-cell-self .cmp-mark { color: var(--gold); }
+    .cmp-note { font-size: 11px; color: var(--mute); line-height: 1.6; font-weight: 400; }
+    .cmp-cell-self .cmp-note { color: rgba(255,255,255,.7); }
     .cmp-src { display: none; }
-    .cmp-foot {
-      max-width: 880px;
-      margin: 24px auto 0;
-      font-size: 11px;
-      color: #6B5A4E;
-      line-height: 1.9;
-      text-align: center;
-      letter-spacing: .03em;
+    .cmp-foot { margin-top: 28px; font-size: 12px; color: var(--sub); line-height: 1.9; text-align: center; }
+    /* スマホ: 1枚の表のまま文字・余白を詰めて画面幅に収める */
+    @media (max-width: 767px) {
+      .cmp { padding: 0 6px 6px; border-radius: 20px; }
+      .cmp-row { grid-template-columns: .82fr 1.08fr 1fr 1fr; }
+      .cmp-head > div { padding: 18px 3px 12px; font-size: 9.5px; line-height: 1.35; }
+      .cmp-head .cmp-col-self { margin-top: -10px; padding-top: 22px; border-radius: 14px 14px 0 0; }
+      .cmp-self-tag { font-size: 7px; letter-spacing: .08em; padding: 2px 6px; margin-bottom: 5px; }
+      .cmp-h-brand { font-size: 10px; }
+      .cmp-label { padding: 12px 5px; font-size: 10px; line-height: 1.35; }
+      .cmp-cell { padding: 11px 3px; font-size: 9.5px; line-height: 1.45; gap: 3px; }
+      .cmp-cell strong { font-size: 13px; }
+      .cmp-cell strong.cmp-week { font-size: 11.5px; }
+      .cmp-mark { font-size: 13px; }
+      .cmp-note { font-size: 8px; line-height: 1.35; }
+      .cmp-row:last-child .cmp-cell-self { border-radius: 0 0 14px 14px; padding-bottom: 14px; }
     }
 
-    /* スマホ: PCと同じ1枚の表のまま、文字・余白を詰めて画面幅に収める */
-    @media (max-width: 767px) {
-      .cmp-head { grid-template-columns: 0.82fr 1.05fr 1fr 1fr; }
-      .cmp-head > div { padding: 9px 4px 8px; font-size: 9px; letter-spacing: 0; line-height: 1.3; }
-      .cmp-self-tag { font-size: 6.5px; letter-spacing: .16em; margin-bottom: 3px; }
-      .cmp-head .cmp-col-self .cmp-h-brand { font-size: 9.5px; }
-      .cmp-row { grid-template-columns: 0.82fr 1.05fr 1fr 1fr; }
-      .cmp-label { padding: 10px 5px; font-size: 9.5px; line-height: 1.35; }
-      .cmp-cell { padding: 9px 4px; font-size: 9px; line-height: 1.5; gap: 3px; }
-      .cmp-cell strong { font-size: 12px; }
-      .cmp-cell strong.cmp-week { font-size: 10.5px; }
-      .cmp-mark { font-size: 12px; }
-      .cmp-note { font-size: 8px; line-height: 1.35; }
+    /* ============================================================
+       FLOW
+       ============================================================ */
+    .flow { position: relative; color: #fff; overflow: hidden; background: var(--ink); }
+    .flow-bg { position: absolute; inset: 0; background: url("assets/photo/flow.webp") center / cover no-repeat; opacity: .35; }
+    .flow::before {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(20,17,14,.92), rgba(20,17,14,.7) 45%, rgba(20,17,14,.95));
     }
+    .flow .container { position: relative; z-index: 2; }
+    .steps { display: grid; grid-template-columns: 1fr; gap: 16px; counter-reset: step; }
+    @media (min-width: 900px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+    .step {
+      position: relative;
+      padding: 30px 26px 30px;
+      border-radius: var(--radius);
+      background: rgba(255,253,249,.97);
+      color: var(--ink);
+    }
+    .step-top { display: flex; align-items: center; justify-content: space-between; }
+    .step-top .ic-box { width: 52px; height: 52px; border-radius: 16px; }
+    .step-top .ic-box svg { width: 24px; height: 24px; }
+    .step-no { font-size: 12px; font-weight: 700; letter-spacing: .2em; color: var(--gold-d); }
+    .step-no b { display: block; font-size: 34px; font-weight: 900; letter-spacing: 0; color: var(--ink); line-height: 1; text-align: right; }
+    .step h3 { margin-top: 22px; font-size: 17px; font-weight: 700; line-height: 1.6; }
+    .step p { margin-top: 10px; font-size: 13px; line-height: 1.95; color: var(--sub); }
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314110E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center / 14px no-repeat;
+      box-shadow: 0 0 0 5px var(--ink);
+    }
+    @media (min-width: 900px) {
+      .step:not(:last-child)::after { right: -24px; top: 50%; transform: translateY(-50%); }
+    }
+    @media (max-width: 899px) {
+      .step:not(:last-child)::after { left: 50%; bottom: -22px; transform: translateX(-50%) rotate(90deg); }
+    }
+
+    /* ============================================================
+       TRUST
+       ============================================================ */
+    .trust-card {
+      max-width: 1080px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) { .trust-card { grid-template-columns: 1.05fr .95fr; } }
+    .trust-text { padding: 56px 44px; }
+    @media (max-width: 560px) { .trust-text { padding: 40px 24px; } }
+    .trust-text .msg { margin-top: 22px; font-size: clamp(18px, 2.2vw, 22px); line-height: 2; font-weight: 500; }
+    .trust-text .msg b { font-size: 1.5em; font-weight: 900; color: var(--gold-d); }
+    .trust-text .btn { margin-top: 32px; }
+    .trust-stats { background: var(--ink); color: #fff; display: grid; grid-template-columns: 1fr; }
+    .trust-stat { padding: 30px 44px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+    .trust-stat + .trust-stat { border-top: 1px solid var(--line-dk); }
+    .trust-stat .k { font-size: 12px; font-weight: 700; letter-spacing: .24em; color: var(--gold); }
+    .trust-stat .v { font-size: clamp(34px, 4vw, 46px); font-weight: 900; line-height: 1; letter-spacing: .01em; }
+    .trust-stat .v small { font-size: .5em; color: var(--gold); margin-left: 2px; }
+    @media (max-width: 560px) { .trust-stat { padding: 24px; } }
+
+    /* ============================================================
+       FAQ
+       ============================================================ */
+    .faq-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    @media (min-width: 1024px) {
+      .faq-grid { grid-template-columns: .7fr 1.3fr; gap: 80px; align-items: start; }
+      .faq-grid .sec-head { position: sticky; top: 130px; margin-bottom: 0; }
+    }
+    .faq-list { display: grid; gap: 14px; }
+    .faq {
+      border-radius: 18px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    .faq[open] { border-color: var(--gold); box-shadow: 0 20px 40px -28px rgba(168,123,75,.6); }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 22px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq .q {
+      display: grid; place-items: center;
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .faq .pm {
+      position: relative;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--paper-2);
+      transition: background .3s ease, transform .4s var(--ease);
+    }
+    .faq .pm::before, .faq .pm::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 12px; height: 1.6px;
+      background: var(--ink);
+      transform: translate(-50%, -50%);
+    }
+    .faq .pm::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq[open] .pm { background: var(--gold); transform: rotate(45deg); }
+    .faq .a { padding: 0 24px 24px 74px; font-size: 14px; line-height: 2; color: var(--sub); }
+    @media (max-width: 560px) {
+      .faq summary { padding: 18px; gap: 12px; font-size: 14px; }
+      .faq .a { padding: 0 18px 20px; font-size: 13px; }
+    }
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
+    .contact { position: relative; color: #fff; background: var(--ink); overflow: hidden; text-align: center; }
+    .contact-bg { position: absolute; inset: 0; background: url("assets/photo/cta.webp") center / cover no-repeat; }
+    .contact::before {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: radial-gradient(80% 80% at 50% 50%, rgba(20,17,14,.82), rgba(20,17,14,.96));
+    }
+    .contact .container { position: relative; z-index: 2; }
+    .contact .label { justify-content: center; }
+    .contact h2 { margin-top: 22px; font-size: clamp(30px, 5vw, 56px); font-weight: 900; line-height: 1.45; }
+    .contact .lead { margin-top: 26px; font-size: 15px; line-height: 2; color: rgba(255,255,255,.75); }
+    .contact .btn { margin-top: 44px; }
+    .contact .fine { margin-top: 22px; font-size: 12px; color: rgba(255,255,255,.5); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer { background: #0D0B09; color: rgba(255,255,255,.6); padding: 72px 0 40px; font-size: 12px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 44px; }
+    @media (min-width: 900px) { .footer-grid { grid-template-columns: 1fr 1.6fr; gap: 80px; } }
+    .footer-brand img { height: 56px; width: auto; }
+    .footer-brand .brand-name { margin-top: 20px; font-size: 11px; font-weight: 700; letter-spacing: .24em; color: var(--gold); }
+    .footer-brand .brand-tag { margin-top: 8px; font-size: 13px; line-height: 1.9; }
+    .index-label { font-size: 11px; font-weight: 700; letter-spacing: .3em; color: rgba(201,160,99,.75); margin-bottom: 18px; }
+    .index-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; }
+    @media (min-width: 640px) { .index-list { grid-template-columns: repeat(3, 1fr); } }
+    .index-list a { display: inline-flex; gap: 10px; align-items: baseline; color: rgba(255,255,255,.75); text-decoration: none; font-size: 12px; letter-spacing: .12em; transition: color .2s ease; }
+    .index-list a:hover, .index-list a:focus-visible { color: var(--gold); }
+    .index-list .num { color: rgba(201,160,99,.6); font-size: 10px; min-width: 22px; }
+    .footer-meta {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; flex-wrap: wrap; gap: 12px 24px;
+      justify-content: space-between; align-items: center;
+      color: rgba(255,255,255,.45);
+    }
+    .footer-meta a { color: var(--gold); text-decoration: none; }
+    .footer-meta a:hover, .footer-meta a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* 固定の相談ボタン（スマホのみ） */
+    .fab {
+      position: fixed;
+      left: 16px; right: 16px; bottom: 16px;
+      z-index: 55;
+      display: none;
+      transform: translateY(140%);
+      transition: transform .5s var(--ease);
+    }
+    .fab .btn { width: 100%; box-shadow: 0 20px 40px -12px rgba(0,0,0,.55); }
+    .fab.is-visible { transform: none; }
+    @media (max-width: 767px) { .fab { display: block; } .site-footer { padding-bottom: 104px; } }
   </style>
-  <noscript>
-    <style>
-      .reveal { opacity: 1 !important; transform: none !important; }
-      .site-header { opacity: 1; transform: none; pointer-events: auto; background: rgba(251,248,241,0.92); border-bottom: 1px solid #D9CFBD; }
-    </style>
-  </noscript>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-  <!-- 紙のグレイン（全面の薄い膜・装飾） -->
-  <div class="grain-overlay" aria-hidden="true"></div>
-
-  <!-- === Sticky Header === -->
-  <header class="site-header" id="siteHeader" aria-label="サイトヘッダー">
-    <a href="#hero" class="brand" aria-label="OTA SANPOT / Simple Branding Web for Food">
-      <span class="brand-lat">OTA SANPOT</span>
-      <span class="brand-sep">／</span>
-      <img src="assets/logo-320.png" alt="Simple Branding Web for Food" class="brand-logo">
-    </a>
-    <a href="#contact" class="nav-cta">相談する</a>
+  <!-- === Header === -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-in">
+      <a href="#hero" class="brand" aria-label="Simple Branding Web for Food トップへ">
+        <img src="assets/logo-wide-light.png" alt="Simple Branding Web for Food" width="480" height="232">
+        <span class="brand-by">OTA<br>SANPOT</span>
+      </a>
+      <nav class="gnav" aria-label="メインナビゲーション">
+        <a href="#showcase">制作サンプル</a>
+        <a href="#value">特徴</a>
+        <a href="#scope">制作範囲</a>
+        <a href="#comparison">比較</a>
+        <a href="#flow">制作の流れ</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+      <div class="header-right">
+        <a href="#contact" class="btn btn-gold header-cta">無料で相談する</a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileNav"><span></span></button>
+      </div>
+    </div>
   </header>
+  <nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+    <a href="#showcase">制作サンプル<span>SHOWCASE</span></a>
+    <a href="#value">特徴<span>VALUE</span></a>
+    <a href="#scope">制作範囲<span>SCOPE</span></a>
+    <a href="#comparison">比較<span>COMPARISON</span></a>
+    <a href="#flow">制作の流れ<span>FLOW</span></a>
+    <a href="#faq">よくある質問<span>FAQ</span></a>
+    <a href="#contact" class="btn btn-gold">無料で相談する<span class="arr" aria-hidden="true">→</span></a>
+  </nav>
 
   <main>
-    <!-- SECTION 01 / HERO -->
-    <section id="hero" class="bg-paper">
-      <!-- 縦書き Latin サイドラベル -->
-      <div class="hero-side-label" aria-hidden="true">OTA SANPOT　／　SIMPLE BRANDING WEB FOR FOOD　／　001</div>
+    <!-- 01 / HERO -->
+    <section id="hero" class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-in">
+        <div>
+          <p class="hero-eyebrow reveal"><span class="dot" aria-hidden="true"></span>OTA SANPOT ／ 飲食店のためのブランディング・ウェブ</p>
+          <h1 class="reveal d1"><span class="ln">お店の<span class="em">“想い”</span>が、</span><br><span class="ln">ちゃんと届く。</span></h1>
+          <p class="hero-lead reveal d2">
+            飲食店のための、1ページで完結する<strong>“ブランディング・ウェブ”</strong>。<br>
+            メニューと、地図と、ひとことの想い。それだけで、十分です。
+          </p>
 
-      <div class="section-wrap text-center">
-        <div class="reveal" style="display:flex;justify-content:center;margin-bottom:12px;">
-          <img src="assets/logo-320.png" alt="Simple Branding Web for Food" style="width:auto;max-width:180px;height:auto;display:block;">
-        </div>
-
-        <p class="eyebrow reveal" style="opacity:0.85;">
-          <span>OTA SANPOT　／　飲食店のためのブランディング・ウェブ</span>
-        </p>
-        <p class="prologue reveal">— I — PROLOGUE</p>
-
-        <div class="hairline reveal" style="width:64px;margin:32px auto 40px;"></div>
-
-        <h1 class="reveal" style="font-size:clamp(28px,5vw,46px);font-weight:300;line-height:1.6;letter-spacing:.02em;color:#1A1613;">
-          お店の<span style="font-weight:500;">"想い"</span>が、<br>ちゃんと届く。
-        </h1>
-
-        <p class="reveal" style="margin-top:32px;font-size:14px;line-height:2.1;font-weight:300;color:#6B5A4E;">
-          飲食店のための、1ページで完結する<br>
-          <span style="color:#A87B4B;font-weight:500;">"ブランディング・ウェブ"</span>。<br>
-          メニューと、地図と、ひとことの想い。それだけで、十分です。
-        </p>
-
-        <div class="reveal price-card" style="margin-top:56px;">
-          <div class="price-cell">
-            <div class="price-cap">制作費</div>
-            <div class="price-fig">¥25,000</div>
-            <div class="price-note">税込・1回のみ</div>
+          <div class="hero-stats reveal d3" role="list">
+            <div class="hero-stat" role="listitem">
+              <p class="cap">制作費</p>
+              <p class="fig">¥25,000</p>
+              <p class="note">税込・1回のみ</p>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <p class="cap">月額</p>
+              <p class="fig">¥0</p>
+              <p class="note">保守費 一生 ¥0</p>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <p class="cap">公開まで</p>
+              <p class="fig">最短<small>3日</small></p>
+              <p class="note">素材お預かりから</p>
+            </div>
           </div>
-          <div class="price-cell">
-            <div class="price-cap">月額</div>
-            <div class="price-fig">¥0</div>
-            <div class="price-note">保守費 一生 ¥0</div>
+
+          <div class="hero-cta reveal d4">
+            <a href="#contact" class="btn btn-gold btn-lg">無料で相談する<span class="arr" aria-hidden="true">→</span></a>
+            <a href="#showcase" class="btn btn-ghost">制作サンプルを見る<span class="arr" aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero-free reveal d5">お見積もり・ご相談 無料</p>
+        </div>
+
+        <div class="devices reveal d3" aria-hidden="true">
+          <div class="float-tag"><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>スマホ・PC 両対応<small>1ページで、ぜんぶ伝わる</small></span></div>
+          <div class="laptop">
+            <div class="laptop-screen"><img src="assets/works/pc4.webp" alt="" width="1200" height="750"></div>
+          </div>
+          <div class="laptop-base"></div>
+          <div class="phone">
+            <div class="phone-screen"><img src="assets/works/sp2.webp" alt="" width="420" height="840"></div>
           </div>
         </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">SCROLL<i></i></div>
+    </section>
 
-        <div class="reveal" style="margin-top:40px;">
-          <a href="#contact" class="btn-primary">無料で相談する<span class="arrow-anim" aria-hidden="true">→</span></a>
+    <!-- 02 / SHOWCASE -->
+    <section id="showcase" class="sec bg-paper">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="label"><span class="no">02</span>SHOWCASE</p>
+          <h2 class="sec-title">業態ごとに、お店の表情を。</h2>
+          <p class="sec-lead">一例として、和食・海鮮・カフェ・焼肉・バー・ラーメンを掲載しています。<br>ほかの業態でも、ご希望に合わせてお作りします。<br>クリックすると、別タブで実際のページが開きます。</p>
         </div>
 
-        <p class="reveal" style="margin-top:16px;font-size:11px;color:#A87B4B;letter-spacing:.15em;">お見積もり・ご相談 無料</p>
+        <div class="works">
+          <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="work reveal">
+            <div class="work-visual">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-shot"><img src="assets/works/pc1.webp" alt="サンプル店舗 V1（和食・割烹）のPC表示" loading="lazy" width="1200" height="750"></div></div>
+              <div class="work-phone"><div><img src="assets/works/sp1.webp" alt="" loading="lazy" width="420" height="840"></div></div>
+            </div>
+            <div class="work-body">
+              <p class="work-tag">SAMPLE 01<span class="pill">和食・割烹</span></p>
+              <p class="work-title">サンプル店舗 V1</p>
+              <p class="work-desc">市場直送の魚と全国の純米酒。夜更けに寄り添う一軒。</p>
+              <p class="work-link">実物を見る<span class="arr" aria-hidden="true">→</span></p>
+            </div>
+          </a>
+
+          <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="work reveal d1">
+            <div class="work-visual">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-shot"><img src="assets/works/pc2.webp" alt="サンプル店舗 V2（海鮮居酒屋）のPC表示" loading="lazy" width="1200" height="750"></div></div>
+              <div class="work-phone"><div><img src="assets/works/sp2.webp" alt="" loading="lazy" width="420" height="840"></div></div>
+            </div>
+            <div class="work-body">
+              <p class="work-tag">SAMPLE 02<span class="pill">海鮮居酒屋</span></p>
+              <p class="work-title">サンプル店舗 V2</p>
+              <p class="work-desc">豊洲直送の刺身と全国の純米酒。サク呑みから二次会まで。</p>
+              <p class="work-link">実物を見る<span class="arr" aria-hidden="true">→</span></p>
+            </div>
+          </a>
+
+          <a href="https://ota-sanpot.github.io/sample_store_v3/" target="_blank" rel="noopener noreferrer" class="work reveal d2">
+            <div class="work-visual">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-shot"><img src="assets/works/pc3.webp" alt="サンプル店舗 V3（カフェ・ベーカリー）のPC表示" loading="lazy" width="1200" height="750"></div></div>
+              <div class="work-phone"><div><img src="assets/works/sp3.webp" alt="" loading="lazy" width="420" height="840"></div></div>
+            </div>
+            <div class="work-body">
+              <p class="work-tag">SAMPLE 03<span class="pill">カフェ・ベーカリー</span></p>
+              <p class="work-title">サンプル店舗 V3</p>
+              <p class="work-desc">朝のパンと、午後の珈琲。一日中、誰かが居る場所。</p>
+              <p class="work-link">実物を見る<span class="arr" aria-hidden="true">→</span></p>
+            </div>
+          </a>
+
+          <a href="https://ota-sanpot.github.io/sample_store_v4/" target="_blank" rel="noopener noreferrer" class="work reveal">
+            <div class="work-visual">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-shot"><img src="assets/works/pc4.webp" alt="サンプル店舗 V4（焼肉）のPC表示" loading="lazy" width="1200" height="750"></div></div>
+              <div class="work-phone"><div><img src="assets/works/sp4.webp" alt="" loading="lazy" width="420" height="840"></div></div>
+            </div>
+            <div class="work-body">
+              <p class="work-tag">SAMPLE 04<span class="pill">焼肉</span></p>
+              <p class="work-title">サンプル店舗 V4</p>
+              <p class="work-desc">炭火と一頭買いの上質肉。蒲田で、ちょっといい夜を。</p>
+              <p class="work-link">実物を見る<span class="arr" aria-hidden="true">→</span></p>
+            </div>
+          </a>
+
+          <a href="https://ota-sanpot.github.io/sample_store_v5/" target="_blank" rel="noopener noreferrer" class="work reveal d1">
+            <div class="work-visual">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-shot"><img src="assets/works/pc5.webp" alt="サンプル店舗 V5（ワインビストロ・バー）のPC表示" loading="lazy" width="1200" height="750"></div></div>
+              <div class="work-phone"><div><img src="assets/works/sp5.webp" alt="" loading="lazy" width="420" height="840"></div></div>
+            </div>
+            <div class="work-body">
+              <p class="work-tag">SAMPLE 05<span class="pill">ワインビストロ・バー</span></p>
+              <p class="work-title">サンプル店舗 V5</p>
+              <p class="work-desc">小皿とグラスワイン。仕事帰りの一杯から、しっとり二次会まで。</p>
+              <p class="work-link">実物を見る<span class="arr" aria-hidden="true">→</span></p>
+            </div>
+          </a>
+
+          <a href="https://ota-sanpot.github.io/sample_store_v6/" target="_blank" rel="noopener noreferrer" class="work reveal d2">
+            <div class="work-visual">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-shot"><img src="assets/works/pc6.webp" alt="サンプル店舗 V6（ラーメン・町中華）のPC表示" loading="lazy" width="1200" height="750"></div></div>
+              <div class="work-phone"><div><img src="assets/works/sp6.webp" alt="" loading="lazy" width="420" height="840"></div></div>
+            </div>
+            <div class="work-body">
+              <p class="work-tag">SAMPLE 06<span class="pill">ラーメン・町中華</span></p>
+              <p class="work-title">サンプル店舗 V6</p>
+              <p class="work-desc">店主こだわりの一杯。早く、熱く、確かな一杯を蒲田で。</p>
+              <p class="work-link">実物を見る<span class="arr" aria-hidden="true">→</span></p>
+            </div>
+          </a>
+        </div>
+
+        <p class="note-center reveal">これらはサンプルです。お店ごとに、写真と文章を差し替えてお作りします。</p>
       </div>
     </section>
 
-    <!-- Ornament: HERO → SHOWCASE -->
-    <div aria-hidden="true" class="ornament">
-      <span class="ornament-line"></span><span class="ornament-mark">✦</span><span class="ornament-line"></span>
-    </div>
-
-    <!-- SECTION 02 / SHOWCASE -->
-    <section id="showcase" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
-      <div class="chapter-mark" aria-hidden="true">02</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow"><span class="roman">— II —</span><span class="sep"></span>SHOWCASE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">業態ごとに、お店の表情を。</h2>
-          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">一例として、和食・海鮮・カフェ・焼肉・バー・ラーメンを掲載しています。<br>ほかの業態でも、ご希望に合わせてお作りします。<br>クリックすると、別タブで実際のページが開きます。</p>
+    <!-- 03 / PAIN -->
+    <section id="pain" class="sec bg-paper2">
+      <div class="container pain-grid">
+        <div class="sec-head reveal">
+          <p class="label"><span class="no">03</span>PAIN</p>
+          <h2 class="sec-title">こんな悩み、<br>ありませんか。</h2>
+          <p class="sec-lead">「ホームページ、そろそろ要るかも」。<br>そう感じたオーナーさんから、よく聞く声です。</p>
         </div>
-
-        <div style="display:grid;gap:36px;" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-
-          <!-- V1 -->
-          <a href="https://ota-sanpot.github.io/sample_store/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:20px;">
-              <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store/" loading="lazy" title="サンプル店舗 V1 プレビュー"></iframe>
-              </div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 01　／　和食・割烹</p>
-            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V1</p>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">市場直送の魚と全国の純米酒。夜更けに寄り添う一軒。</p>
-            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
-          </a>
-
-          <!-- V2 -->
-          <a href="https://ota-sanpot.github.io/sample_store_v2/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:20px;">
-              <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store_v2/" loading="lazy" title="サンプル店舗 V2 プレビュー"></iframe>
-              </div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 02　／　海鮮居酒屋</p>
-            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V2</p>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">豊洲直送の刺身と全国の純米酒。サク呑みから二次会まで。</p>
-            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
-          </a>
-
-          <!-- V3 -->
-          <a href="https://ota-sanpot.github.io/sample_store_v3/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:20px;">
-              <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store_v3/" loading="lazy" title="サンプル店舗 V3 プレビュー"></iframe>
-              </div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 03　／　カフェ・ベーカリー</p>
-            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V3</p>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">朝のパンと、午後の珈琲。一日中、誰かが居る場所。</p>
-            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
-          </a>
-
-          <!-- V4 -->
-          <a href="https://ota-sanpot.github.io/sample_store_v4/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:20px;">
-              <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store_v4/" loading="lazy" title="サンプル店舗 V4 プレビュー"></iframe>
-              </div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 04　／　焼肉</p>
-            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V4</p>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">炭火と一頭買いの上質肉。蒲田で、ちょっといい夜を。</p>
-            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
-          </a>
-
-          <!-- V5 -->
-          <a href="https://ota-sanpot.github.io/sample_store_v5/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:20px;">
-              <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store_v5/" loading="lazy" title="サンプル店舗 V5 プレビュー"></iframe>
-              </div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 05　／　ワインビストロ・バー</p>
-            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V5</p>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">小皿とグラスワイン。仕事帰りの一杯から、しっとり二次会まで。</p>
-            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
-          </a>
-
-          <!-- V6 -->
-          <a href="https://ota-sanpot.github.io/sample_store_v6/" target="_blank" rel="noopener noreferrer" class="reveal showcase-card" style="text-decoration:none;color:inherit;display:block;background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <div class="phone-bezel" style="margin-bottom:20px;">
-              <div class="phone-screen">
-                <iframe src="https://ota-sanpot.github.io/sample_store_v6/" loading="lazy" title="サンプル店舗 V6 プレビュー"></iframe>
-              </div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">SAMPLE 06　／　ラーメン・町中華</p>
-            <p style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">サンプル店舗 V6</p>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.8;">店主こだわりの一杯。早く、熱く、確かな一杯を蒲田で。</p>
-            <p style="margin-top:16px;font-size:11px;letter-spacing:.2em;color:#1A1613;">実物を見る<span class="arrow-anim" aria-hidden="true">→</span></p>
-          </a>
-
-        </div>
-
-        <p class="text-center reveal" style="margin-top:48px;font-size:11px;color:#A87B4B;letter-spacing:.15em;">これらはサンプルです。お店ごとに、写真と文章を差し替えてお作りします。</p>
-      </div>
-    </section>
-
-    <!-- SECTION 03 / PAIN -->
-    <section id="pain" class="bg-paper">
-      <div class="chapter-mark" aria-hidden="true">03</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow"><span class="roman">— III —</span><span class="sep"></span>PAIN</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">こんな悩み、ありませんか。</h2>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr;gap:32px;max-width:720px;margin:0 auto;">
-          <div class="reveal" style="padding:24px 4px;border-bottom:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">01</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;line-height:1.8;">Googleマップ・SNSだけで何とかしてきたけれど、<br class="hidden md:inline">最近お客さんに「ホームページは？」と聞かれる。</p>
-          </div>
-          <div class="reveal" style="padding:24px 4px;border-bottom:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">02</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;line-height:1.8;">立派なホームページは、高い・難しい・面倒。<br class="hidden md:inline">そこまでのものは、正直いまは要らない。</p>
-          </div>
-          <div class="reveal" style="padding:24px 4px;border-bottom:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">03</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;line-height:1.8;">月々の保守費用・サーバー代がかかり続けるのが、<br class="hidden md:inline">長く続けるとなかなか重い。</p>
-          </div>
-          <div class="reveal" style="padding:24px 4px;border-bottom:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">04</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;line-height:1.8;">プランがいくつもあって、選ぶこと自体が手間。<br class="hidden md:inline">シンプルに、一択で決めたい。</p>
-          </div>
-          <div class="reveal" style="padding:24px 4px;border-bottom:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">05</p>
-            <p style="font-size:16px;font-weight:500;color:#1A1613;line-height:1.8;">自分でツールを触る時間も、業者を探す時間も<br class="hidden md:inline">なかなか取れない。</p>
-          </div>
+        <div>
+          <ul class="pain-list">
+            <li class="pain-item reveal"><span class="pain-no">01</span><p>Googleマップ・SNSだけで何とかしてきたけれど、最近お客さんに「ホームページは？」と聞かれる。</p></li>
+            <li class="pain-item reveal d1"><span class="pain-no">02</span><p>立派なホームページは、高い・難しい・面倒。そこまでのものは、正直いまは要らない。</p></li>
+            <li class="pain-item reveal d2"><span class="pain-no">03</span><p>月々の保守費用・サーバー代がかかり続けるのが、長く続けるとなかなか重い。</p></li>
+            <li class="pain-item reveal d3"><span class="pain-no">04</span><p>プランがいくつもあって、選ぶこと自体が手間。シンプルに、一択で決めたい。</p></li>
+            <li class="pain-item reveal d4"><span class="pain-no">05</span><p>自分でツールを触る時間も、業者を探す時間もなかなか取れない。</p></li>
+          </ul>
+          <p class="pain-arrow reveal">その答えが、1枚の「看板」です<i></i></p>
         </div>
       </div>
     </section>
 
-    <!-- Ornament: PAIN → CONCEPT -->
-    <div aria-hidden="true" class="ornament">
-      <span class="ornament-line"></span><span class="ornament-mark">✦</span><span class="ornament-line"></span>
-    </div>
-
-    <!-- SECTION 04 / CONCEPT — visual centerpiece -->
-    <section id="concept" style="background:#1A1613;color:#fff;">
-      <div class="concept-quote-glyph" aria-hidden="true">“</div>
-      <div class="chapter-mark" aria-hidden="true" style="color: rgba(201,160,99,0.05);">04</div>
-      <div class="section-wrap text-center">
-        <p class="eyebrow reveal" style="color:#C9A063;">
-          <span class="roman">— IV —</span><span class="sep"></span>CONCEPT
-        </p>
-
-        <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;color:#fff;">
-          ホームページではなく、<br><span class="concept-emph-underline" style="font-weight:500;color:#C9A063;">看板</span>を。
-        </h2>
-
-        <blockquote class="reveal concept-quote">
-          通りすがりの誰かが、ふと立ち止まる。<br>
-          名前と、佇まいと、場所だけ伝わればいい。<br>
-          看板に必要なのは、それだけです。
-        </blockquote>
-
-        <p class="reveal concept-editor-note">— A note from the editor —</p>
-
-        <div class="reveal" style="margin-top:40px;font-size:13px;color:rgba(255,255,255,0.6);line-height:2;">
-          私たちが作るのは、ホームページの形をした、<br>
-          お店の<span style="color:#C9A063;font-weight:500;">デジタル看板</span>。<br>
-          ブランドの第一印象を、1枚で。
+    <!-- 04 / CONCEPT -->
+    <section id="concept" class="concept">
+      <div class="concept-grid">
+        <div class="concept-photo" aria-hidden="true">
+          <img src="assets/photo/concept.webp" alt="" loading="lazy">
+        </div>
+        <div class="concept-text on-dark">
+          <div class="concept-glyph" aria-hidden="true">“</div>
+          <p class="label reveal"><span class="no">04</span>CONCEPT</p>
+          <h2 class="reveal d1">ホームページではなく、<br><span class="kanban">看板</span>を。</h2>
+          <blockquote class="concept-quote reveal d2">
+            通りすがりの誰かが、ふと立ち止まる。<br>
+            名前と、佇まいと、場所だけ伝わればいい。<br>
+            看板に必要なのは、それだけです。
+          </blockquote>
+          <p class="concept-note reveal d2">A note from the editor</p>
+          <div class="concept-body reveal d3">
+            私たちが作るのは、ホームページの形をした、<br>
+            お店の<strong>デジタル看板</strong>。<br>
+            ブランドの第一印象を、1枚で。
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 05 / VALUE -->
-    <section id="value" class="bg-paper">
-      <div class="chapter-mark" aria-hidden="true">05</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow"><span class="roman">— V —</span><span class="sep"></span>VALUE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">Simple Branding Web、4つの特徴。</h2>
+    <!-- 05 / VALUE -->
+    <section id="value" class="sec bg-paper">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="label"><span class="no">05</span>VALUE</p>
+          <h2 class="sec-title">Simple Branding Web、<br>4つの特徴。</h2>
         </div>
-
-        <div style="display:grid;gap:48px;max-width:720px;margin:0 auto;" class="grid-cols-1 md:grid-cols-2">
-
-          <div class="reveal">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">01</p>
-            <h3 style="font-size:17px;font-weight:500;color:#1A1613;margin-bottom:12px;">1ページ完結</h3>
-            <p style="font-size:13px;color:#6B5A4E;line-height:2;">「看板」だから、長い説明はいりません。スクロールひとつで、ぜんぶ伝わります。</p>
+        <div class="values">
+          <div class="value reveal">
+            <span class="num" aria-hidden="true">01</span>
+            <div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 7h6M9 11h6M9 15h3"/></svg></div>
+            <h3>1ページ完結</h3>
+            <p>「看板」だから、長い説明はいりません。スクロールひとつで、ぜんぶ伝わります。</p>
           </div>
-
-          <div class="reveal">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">02</p>
-            <h3 style="font-size:17px;font-weight:500;color:#1A1613;margin-bottom:12px;">¥25,000 買い切り</h3>
-            <p style="font-size:13px;color:#6B5A4E;line-height:2;">「〜」表記なしの明朗会計。後から追加請求はありません。</p>
+          <div class="value is-feature reveal d1">
+            <span class="num" aria-hidden="true">02</span>
+            <div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+            <h3><span class="gold">¥25,000</span> 買い切り</h3>
+            <p>「〜」表記なしの明朗会計。後から追加請求はありません。</p>
           </div>
-
-          <div class="reveal">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">03</p>
-            <h3 style="font-size:17px;font-weight:500;color:#1A1613;margin-bottom:12px;">月額 ¥0</h3>
-            <p style="font-size:13px;color:#6B5A4E;line-height:2;">サーバー代・維持費は一生かかりません。一度作ったら、そのままです。</p>
+          <div class="value is-feature reveal d2">
+            <span class="num" aria-hidden="true">03</span>
+            <div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="15" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9.5 14.5 5 0"/></svg></div>
+            <h3>月額 <span class="gold">¥0</span></h3>
+            <p>サーバー代・維持費は一生かかりません。一度作ったら、そのままです。</p>
           </div>
-
-          <div class="reveal">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:12px;">04</p>
-            <h3 style="font-size:17px;font-weight:500;color:#1A1613;margin-bottom:12px;">1プランのみ</h3>
-            <p style="font-size:13px;color:#6B5A4E;line-height:2;">オプションも比較も、ありません。「これ一択」で、迷わず始められます。</p>
+          <div class="value reveal d3">
+            <span class="num" aria-hidden="true">04</span>
+            <div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16.5 9.5"/></svg></div>
+            <h3>1プランのみ</h3>
+            <p>オプションも比較も、ありません。「これ一択」で、迷わず始められます。</p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- SECTION 06 / SCOPE -->
-    <section id="scope" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
-      <div class="chapter-mark" aria-hidden="true">06</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:48px;">
-          <p class="eyebrow"><span class="roman">— VI —</span><span class="sep"></span>SCOPE</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">「看板」に必要なものを、すべて。</h2>
-          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">含まれるもの／含まれないもの、最初に明示します。</p>
+    <!-- 06 / SCOPE -->
+    <section id="scope" class="sec bg-white">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="label"><span class="no">06</span>SCOPE</p>
+          <h2 class="sec-title">「看板」に必要なものを、すべて。</h2>
+          <p class="sec-lead">含まれるもの／含まれないもの、最初に明示します。</p>
         </div>
-
-        <div style="display:grid;gap:48px;max-width:840px;margin:0 auto;" class="grid-cols-1 md:grid-cols-2">
-
-          <!-- 含まれるもの -->
-          <div class="reveal" style="background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:16px;">INCLUDED　／　含まれるもの</p>
-            <ul style="list-style:none;padding:0;margin:0;font-size:13px;color:#1A1613;line-height:2.4;">
-              <li>・店舗名・キャッチ・店主の想い</li>
-              <li>・メニュー（写真と価格）</li>
-              <li>・アクセス（地図・住所・電話・営業時間）</li>
-              <li>・SNS／予約／Googleマップへのリンク</li>
-              <li>・独自ドメイン対応</li>
+        <div class="scope-grid">
+          <div class="scope-card in reveal">
+            <div class="scope-head"><h3>含まれるもの</h3><span>INCLUDED</span></div>
+            <ul class="scope-list">
+              <li><span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>店舗名・キャッチ・店主の想い</li>
+              <li><span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>メニュー（写真と価格）</li>
+              <li><span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>アクセス（地図・住所・電話・営業時間）</li>
+              <li><span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>SNS／予約／Googleマップへのリンク</li>
+              <li><span class="chk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>独自ドメイン対応</li>
             </ul>
           </div>
-
-          <!-- 含まれないもの -->
-          <div class="reveal" style="background:#FBF8F1;padding:32px 28px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#6B5A4E;margin-bottom:16px;">NOT INCLUDED　／　含まれないもの</p>
-            <ul style="list-style:none;padding:0;margin:0;font-size:13px;color:#6B5A4E;line-height:2.4;">
-              <li>・予約システム</li>
-              <li>・ネット注文・EC</li>
-              <li>・ブログ機能</li>
-              <li>・英語ページ</li>
-              <li>・撮影代行</li>
+          <div class="scope-card out reveal d1">
+            <div class="scope-head"><h3>含まれないもの</h3><span>NOT INCLUDED</span></div>
+            <ul class="scope-list">
+              <li><span class="xmk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>予約システム</li>
+              <li><span class="xmk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>ネット注文・EC</li>
+              <li><span class="xmk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>ブログ機能</li>
+              <li><span class="xmk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>英語ページ</li>
+              <li><span class="xmk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>撮影代行</li>
             </ul>
-            <p style="margin-top:20px;padding-top:20px;border-top:1px solid #D9CFBD;font-size:11px;color:#A87B4B;line-height:1.8;">足したいものは、お気軽にご相談ください。別途お見積もりいたします。</p>
+            <p class="scope-more">足したいものは、お気軽にご相談ください。別途お見積もりいたします。</p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- SECTION 07 / USE CASES -->
-    <section id="usecases" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
-      <div class="chapter-mark" aria-hidden="true">07</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:56px;">
-          <p class="eyebrow"><span class="roman">— VII —</span><span class="sep"></span>USE CASES</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">作ったあと、どう使う？</h2>
-          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">SNS の出口に、名刺の QR に、Google マップの「公式」に。<br>一度作れば、ずっと "お店の顔" として働きます。</p>
+    <!-- 07 / USE CASES -->
+    <section id="usecases" class="sec bg-paper">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="label"><span class="no">07</span>USE CASES</p>
+          <h2 class="sec-title">作ったあと、どう使う？</h2>
+          <p class="sec-lead">SNS の出口に、名刺の QR に、Google マップの「公式」に。<br>一度作れば、ずっと “お店の顔” として働きます。</p>
         </div>
-
-        <div style="display:grid;gap:24px;" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-
-          <div class="reveal" style="background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">A　／　SNS の "出口"</p>
-            <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:12px;line-height:1.6;">フォロワーを、お店ファンに。</h3>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.9;">Instagram のプロフィール URL、TikTok の概要欄、LINE 公式のリッチメニュー、X の bio・固定ツイート。リンクツリーなしで、自分のサイトへ直接。</p>
+        <div class="uses">
+          <div class="use reveal">
+            <div class="use-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></div><span class="use-letter" aria-hidden="true">A</span></div>
+            <p class="use-kicker">SNS の “出口”</p>
+            <h3>フォロワーを、お店ファンに。</h3>
+            <p>Instagram のプロフィール URL、TikTok の概要欄、LINE 公式のリッチメニュー、X の bio・固定ツイート。リンクツリーなしで、自分のサイトへ直接。</p>
           </div>
-
-          <div class="reveal" style="background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">B　／　マップ・グルメサイト</p>
-            <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:12px;line-height:1.6;">"公式情報" として置く。</h3>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.9;">Google ビジネスプロフィールの「ウェブサイト」、食べログ・ぐるなび・Retty・ホットペッパーの公式 HP 欄。検索結果で、お店の言葉を発信できる場所。</p>
+          <div class="use reveal d1">
+            <div class="use-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div><span class="use-letter" aria-hidden="true">B</span></div>
+            <p class="use-kicker">マップ・グルメサイト</p>
+            <h3>“公式情報” として置く。</h3>
+            <p>Google ビジネスプロフィールの「ウェブサイト」、食べログ・ぐるなび・Retty・ホットペッパーの公式 HP 欄。検索結果で、お店の言葉を発信できる場所。</p>
           </div>
-
-          <div class="reveal" style="background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">C　／　QR コード</p>
-            <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:12px;line-height:1.6;">紙とリアルから、Web へ。</h3>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.9;">名刺の裏、ショップカード、紙メニュー、入口の看板・のれん、テイクアウト袋、テーブル QR。一枚の QR で、店の世界観をまるごと届ける。</p>
+          <div class="use reveal d2">
+            <div class="use-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg></div><span class="use-letter" aria-hidden="true">C</span></div>
+            <p class="use-kicker">QR コード</p>
+            <h3>紙とリアルから、Web へ。</h3>
+            <p>名刺の裏、ショップカード、紙メニュー、入口の看板・のれん、テイクアウト袋、テーブル QR。一枚の QR で、店の世界観をまるごと届ける。</p>
           </div>
-
-          <div class="reveal" style="background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">D　／　広告・配信</p>
-            <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:12px;line-height:1.6;">"着地ページ" として使う。</h3>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.9;">Instagram 広告・Google 広告のリンク先、LINE 一斉送信の飛び先、メルマガのリンク。広告で生まれた興味を、お店の魅力で受け止める。</p>
+          <div class="use reveal">
+            <div class="use-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></div><span class="use-letter" aria-hidden="true">D</span></div>
+            <p class="use-kicker">広告・配信</p>
+            <h3>“着地ページ” として使う。</h3>
+            <p>Instagram 広告・Google 広告のリンク先、LINE 一斉送信の飛び先、メルマガのリンク。広告で生まれた興味を、お店の魅力で受け止める。</p>
           </div>
-
-          <div class="reveal" style="background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">E　／　取引・採用・コラボ</p>
-            <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:12px;line-height:1.6;">"信頼の名刺" として渡す。</h3>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.9;">大家・仕入先への自己紹介、採用応募者への「うちはこういう店です」、取材・メディア掲載時の参照先、商店街や他店との連携資料に。</p>
+          <div class="use reveal d1">
+            <div class="use-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.6-1.5 1.7-2.2 3-2.2s2.4.7 3 2.2M14 10h4.5M14 13.5h3"/></svg></div><span class="use-letter" aria-hidden="true">E</span></div>
+            <p class="use-kicker">取引・採用・コラボ</p>
+            <h3>“信頼の名刺” として渡す。</h3>
+            <p>大家・仕入先への自己紹介、採用応募者への「うちはこういう店です」、取材・メディア掲載時の参照先、商店街や他店との連携資料に。</p>
           </div>
-
-          <div class="reveal" style="background:#FBF8F1;padding:28px 24px;border:1px solid #D9CFBD;">
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;font-weight:500;margin-bottom:8px;">F　／　新メニュー・イベント告知</p>
-            <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:12px;line-height:1.6;">"告知の常設ベース" に。</h3>
-            <p style="font-size:12px;color:#6B5A4E;line-height:1.9;">季節限定メニューの展示、周年祭・イベント告知、SNS の単発投稿を蓄積する場所。流れて消えていく投稿を、お店の財産に変える。</p>
+          <div class="use reveal d2">
+            <div class="use-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3 4.9 4.9M19.1 19.1l-1.4-1.4M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg></div><span class="use-letter" aria-hidden="true">F</span></div>
+            <p class="use-kicker">新メニュー・イベント告知</p>
+            <h3>“告知の常設ベース” に。</h3>
+            <p>季節限定メニューの展示、周年祭・イベント告知、SNS の単発投稿を蓄積する場所。流れて消えていく投稿を、お店の財産に変える。</p>
           </div>
-
         </div>
-
-        <p class="text-center reveal" style="margin-top:48px;font-size:11px;color:#A87B4B;letter-spacing:.15em;">使い方は、お店の数だけ。ご相談時に、お店に合った活用方法もご提案します。</p>
+        <p class="note-center reveal">使い方は、お店の数だけ。ご相談時に、お店に合った活用方法もご提案します。</p>
       </div>
     </section>
 
-    <!-- SECTION 08 / COMPARISON -->
-    <section id="comparison" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
-      <div class="chapter-mark" aria-hidden="true">08</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:56px;">
-          <p class="eyebrow"><span class="roman">— VIII —</span><span class="sep"></span>COMPARISON</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">“看板1枚”を、どこに頼むか。</h2>
-          <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">同じ「お店のWeb」でも、頼み先で費用も手間も大きく変わります。</p>
+    <!-- 08 / COMPARISON -->
+    <section id="comparison" class="sec bg-paper2">
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="label"><span class="no">08</span>COMPARISON</p>
+          <h2 class="sec-title">“看板1枚”を、どこに頼むか。</h2>
+          <p class="sec-lead">同じ「お店のWeb」でも、頼み先で費用も手間も大きく変わります。</p>
         </div>
 
-        <div class="cmp reveal">
-          <!-- 見出し行（PC表示） -->
-          <div class="cmp-head">
-            <div aria-hidden="true"></div>
-            <div class="cmp-col-self">
-              <span class="cmp-self-tag">RECOMMENDED</span>
-              <span class="cmp-h-brand">Simple Branding Web</span>
+        <div class="cmp-wrap reveal">
+          <div class="cmp">
+            <div class="cmp-row cmp-head">
+              <div aria-hidden="true"></div>
+              <div class="cmp-col-self">
+                <span class="cmp-self-tag">RECOMMENDED</span>
+                <span class="cmp-h-brand">Simple Branding Web</span>
+              </div>
+              <div>一般的な<br>Web制作会社</div>
+              <div>自作ツール<br>(Wix・ペライチ等)</div>
             </div>
-            <div>一般的な<br>Web制作会社</div>
-            <div>自作ツール<br>(Wix・ペライチ等)</div>
-          </div>
 
-          <!-- 初期費用 -->
-          <div class="cmp-row">
-            <div class="cmp-label">初期費用</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong>¥25,000</strong><span class="cmp-note">買い切り・税込</span></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>約 ¥150,000〜500,000＋<span class="cmp-note">目安・ピンキリ</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>¥0〜<span class="cmp-note">代わりに自分の時間</span></div>
-          </div>
+            <div class="cmp-row">
+              <div class="cmp-label">初期費用</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong>¥25,000</strong><span class="cmp-note">買い切り・税込</span></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>約 ¥150,000〜500,000＋<span class="cmp-note">目安・ピンキリ</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span>¥0〜<span class="cmp-note">代わりに自分の時間</span></div>
+            </div>
 
-          <!-- 月額・固定費 -->
-          <div class="cmp-row">
-            <div class="cmp-label">月額・固定費</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong>¥0</strong></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>月 ¥3,000〜10,000<span class="cmp-note">保守・サーバー</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>月 ¥1,000〜3,000<span class="cmp-note">ドメイン・有料プラン</span></div>
-          </div>
+            <div class="cmp-row">
+              <div class="cmp-label">月額・固定費</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong>¥0</strong></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>月 ¥3,000〜10,000<span class="cmp-note">保守・サーバー</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span>月 ¥1,000〜3,000<span class="cmp-note">ドメイン・有料プラン</span></div>
+            </div>
 
-          <!-- 飲食店への精通 -->
-          <div class="cmp-row">
-            <div class="cmp-label">飲食店への精通</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><span class="cmp-mark">◎</span><span class="cmp-note" style="color:#1A1613;">飲食店を2万人に届けた地域メディアが制作</span></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span><span class="cmp-mark" style="color:#6B5A4E;">△</span><span class="cmp-note">業種は様々。飲食特化とは限らない</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>テンプレ任せ<span class="cmp-note">魅せ方は自分次第</span></div>
-          </div>
+            <div class="cmp-row">
+              <div class="cmp-label">飲食店への精通</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><span class="cmp-mark">◎</span><span class="cmp-note">飲食店を2万人に届けた地域メディアが制作</span></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span><span class="cmp-mark" style="color:var(--mute);">△</span><span class="cmp-note">業種は様々。飲食特化とは限らない</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span>テンプレ任せ<span class="cmp-note">魅せ方は自分次第</span></div>
+            </div>
 
-          <!-- オーナーの手間 -->
-          <div class="cmp-row">
-            <div class="cmp-label">オーナーの手間</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span>ほぼお任せ<span class="cmp-note">写真と情報を渡すだけ</span></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>打ち合わせ多め<span class="cmp-note">要件確認に時間</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>全部自分<span class="cmp-note">文章も写真も組み立ても</span></div>
-          </div>
+            <div class="cmp-row">
+              <div class="cmp-label">オーナーの手間</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span>ほぼお任せ<span class="cmp-note">写真と情報を渡すだけ</span></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>打ち合わせ多め<span class="cmp-note">要件確認に時間</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span>全部自分<span class="cmp-note">文章も写真も組み立ても</span></div>
+            </div>
 
-          <!-- 公開までの期間 -->
-          <div class="cmp-row">
-            <div class="cmp-label">公開までの期間</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong class="cmp-week">最短3日</strong></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>1〜3ヶ月<span class="cmp-note">が一般的</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>自分次第<span class="cmp-note">数日〜挫折も</span></div>
-          </div>
+            <div class="cmp-row">
+              <div class="cmp-label">公開までの期間</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><strong class="cmp-week">最短3日</strong></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>1〜3ヶ月<span class="cmp-note">が一般的</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span>自分次第<span class="cmp-note">数日〜挫折も</span></div>
+            </div>
 
-          <!-- プランの分かりやすさ -->
-          <div class="cmp-row">
-            <div class="cmp-label">プランの<br>分かりやすさ</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span>1プラン一択<span class="cmp-note">明朗会計・「〜」表記なし</span></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>プラン多数<span class="cmp-note">オプションで変動</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span>段階プラン<span class="cmp-note">無料〜有料</span></div>
-          </div>
+            <div class="cmp-row">
+              <div class="cmp-label">プランの<br>分かりやすさ</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span>1プラン一択<span class="cmp-note">明朗会計・「〜」表記なし</span></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span>プラン多数<span class="cmp-note">オプションで変動</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span>段階プラン<span class="cmp-note">無料〜有料</span></div>
+            </div>
 
-          <!-- 地域での発信・拡散 -->
-          <div class="cmp-row">
-            <div class="cmp-label">地域での発信・拡散</div>
-            <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><span class="cmp-mark">◎</span><span class="cmp-note" style="color:#1A1613;">地域メディア発。拡散や“見られ方”も相談できる</span></div>
-            <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span><span class="cmp-mark" style="color:#B7AB98;">—</span><span class="cmp-note">制作のみ</span></div>
-            <div class="cmp-cell"><span class="cmp-src">自作ツール</span><span class="cmp-mark" style="color:#B7AB98;">—</span><span class="cmp-note">運用は自分</span></div>
+            <div class="cmp-row">
+              <div class="cmp-label">地域での発信・拡散</div>
+              <div class="cmp-cell cmp-cell-self"><span class="cmp-src">Simple Branding Web</span><span class="cmp-mark">◎</span><span class="cmp-note">地域メディア発。拡散や“見られ方”も相談できる</span></div>
+              <div class="cmp-cell"><span class="cmp-src">一般的なWeb制作会社</span><span class="cmp-mark" style="color:#C4B8A6;">—</span><span class="cmp-note">制作のみ</span></div>
+              <div class="cmp-cell"><span class="cmp-src">自作ツール</span><span class="cmp-mark" style="color:#C4B8A6;">—</span><span class="cmp-note">運用は自分</span></div>
+            </div>
           </div>
-
+          <p class="cmp-foot">※ 本格的なEC・予約システムが必要なら、制作会社の方が向いています。Simple Branding Web は“1枚の看板”に特化したサービスです。</p>
         </div>
-
-        <p class="cmp-foot reveal">※ 本格的なEC・予約システムが必要なら、制作会社の方が向いています。Simple Branding Web は“1枚の看板”に特化したサービスです。</p>
       </div>
     </section>
 
-    <!-- SECTION 09 / FLOW -->
-    <section id="flow" class="bg-paper">
-      <div class="chapter-mark" aria-hidden="true">09</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:64px;">
-          <p class="eyebrow"><span class="roman">— IX —</span><span class="sep"></span>FLOW</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">制作の流れ。</h2>
+    <!-- 09 / FLOW -->
+    <section id="flow" class="sec flow on-dark">
+      <div class="flow-bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="sec-head center reveal">
+          <p class="label"><span class="no">09</span>FLOW</p>
+          <h2 class="sec-title">制作の流れ。</h2>
+          <p class="sec-lead">ご相談から公開まで、4ステップ。</p>
         </div>
-
-        <ol style="list-style:none;padding:0;margin:0;max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:0;">
-
-          <li class="reveal" style="display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;padding:28px 0;border-bottom:1px solid #D9CFBD;">
-            <div style="font-size:32px;font-weight:300;color:#A87B4B;line-height:1;">01</div>
-            <div>
-              <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">無料で相談</h3>
-              <p style="font-size:13px;color:#6B5A4E;line-height:2;">Googleフォームから店舗名・現状などを送ってください。1〜2営業日でご返信します。</p>
-            </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <div class="step-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></div><p class="step-no">STEP<b>01</b></p></div>
+            <h3>無料で相談</h3>
+            <p>Googleフォームから店舗名・現状などを送ってください。1〜2営業日でご返信します。</p>
           </li>
-
-          <li class="reveal" style="display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;padding:28px 0;border-bottom:1px solid #D9CFBD;">
-            <div style="font-size:32px;font-weight:300;color:#A87B4B;line-height:1;">02</div>
-            <div>
-              <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">ヒアリング & 素材受け取り</h3>
-              <p style="font-size:13px;color:#6B5A4E;line-height:2;">写真・メニュー・営業時間などをLINEでお送りください。スマホで撮ったもので十分です。</p>
-            </div>
+          <li class="step reveal d1">
+            <div class="step-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="12.5" r="3.5"/></svg></div><p class="step-no">STEP<b>02</b></p></div>
+            <h3>ヒアリング &amp; 素材受け取り</h3>
+            <p>写真・メニュー・営業時間などをLINEでお送りください。スマホで撮ったもので十分です。</p>
           </li>
-
-          <li class="reveal" style="display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;padding:28px 0;border-bottom:1px solid #D9CFBD;">
-            <div style="font-size:32px;font-weight:300;color:#A87B4B;line-height:1;">03</div>
-            <div>
-              <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">最短3日で初稿 → 公開</h3>
-              <p style="font-size:13px;color:#6B5A4E;line-height:2;">初稿をご確認いただき、調整後に公開。ドメインの取得もこちらでサポートします。</p>
-            </div>
+          <li class="step reveal d2">
+            <div class="step-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><p class="step-no">STEP<b>03</b></p></div>
+            <h3>最短3日で初稿 → 公開</h3>
+            <p>初稿をご確認いただき、調整後に公開。ドメインの取得もこちらでサポートします。</p>
           </li>
-
-          <li class="reveal" style="display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;padding:28px 0;">
-            <div style="font-size:32px;font-weight:300;color:#A87B4B;line-height:1;">04</div>
-            <div>
-              <h3 style="font-size:15px;font-weight:500;color:#1A1613;margin-bottom:10px;">公開後の小修正、いつでも</h3>
-              <p style="font-size:13px;color:#6B5A4E;line-height:2;">営業時間変更、メニュー差し替えなど、軽微な修正は随時対応します。</p>
-            </div>
+          <li class="step reveal d3">
+            <div class="step-top"><div class="ic-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div><p class="step-no">STEP<b>04</b></p></div>
+            <h3>公開後の小修正、いつでも</h3>
+            <p>営業時間変更、メニュー差し替えなど、軽微な修正は随時対応します。</p>
           </li>
-
         </ol>
       </div>
     </section>
 
-    <!-- Ornament: FLOW → TRUST -->
-    <div aria-hidden="true" class="ornament">
-      <span class="ornament-line"></span><span class="ornament-mark">✦</span><span class="ornament-line"></span>
-    </div>
-
-    <!-- SECTION 09 / TRUST -->
-    <section id="trust" class="bg-kinari" style="border-top:1px solid #D9CFBD;">
-      <div class="chapter-mark" aria-hidden="true">10</div>
-      <div class="section-wrap text-center">
-        <p class="eyebrow reveal"><span class="roman">— X —</span><span class="sep"></span>WHO WE ARE</p>
-
-        <p class="reveal" style="margin-top:32px;font-size:15px;line-height:2.2;font-weight:300;color:#1A1613;max-width:600px;margin-left:auto;margin-right:auto;">
-          大田区の飲食店を、SNSで<span style="font-weight:700;color:#A87B4B;">2万人</span>にお届けしてきた<br>
-          地域メディア「<span style="font-weight:500;">大田区サンポット</span>」が作ります。
-        </p>
-
-        <div class="reveal" style="margin-top:48px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;">
-          <div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:6px;">INSTAGRAM</p>
-            <p style="font-size:24px;font-weight:300;color:#1A1613;">20,000<span style="font-size:12px;font-weight:400;color:#6B5A4E;margin-left:4px;">+</span></p>
+    <!-- 10 / TRUST -->
+    <section id="trust" class="sec bg-paper">
+      <div class="container">
+        <div class="trust-card reveal">
+          <div class="trust-text">
+            <p class="label"><span class="no">10</span>WHO WE ARE</p>
+            <p class="msg">大田区の飲食店を、SNSで<b>2万人</b>にお届けしてきた地域メディア「大田区サンポット」が作ります。</p>
+            <a href="https://ota-sanpot.com/" target="_blank" rel="noopener" class="btn btn-dark">サンポット本体を見る<span class="arr" aria-hidden="true">→</span></a>
           </div>
-          <div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:6px;">TIKTOK</p>
-            <p style="font-size:24px;font-weight:300;color:#1A1613;">10,000<span style="font-size:12px;font-weight:400;color:#6B5A4E;margin-left:4px;">+</span></p>
+          <div class="trust-stats">
+            <div class="trust-stat"><span class="k">INSTAGRAM</span><span class="v">20,000<small>+</small></span></div>
+            <div class="trust-stat"><span class="k">TIKTOK</span><span class="v">10,000<small>+</small></span></div>
+            <div class="trust-stat"><span class="k">PR実績</span><span class="v">多数</span></div>
           </div>
-          <div>
-            <p style="font-size:10px;letter-spacing:.3em;color:#A87B4B;margin-bottom:6px;">PR実績</p>
-            <p style="font-size:24px;font-weight:300;color:#1A1613;">多数</p>
-          </div>
-        </div>
-
-        <div class="reveal" style="margin-top:48px;">
-          <a href="https://ota-sanpot.com/" target="_blank" rel="noopener" class="btn-outline">サンポット本体を見る<span class="arrow-anim" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 10 / FAQ -->
-    <section id="faq" class="bg-paper">
-      <div class="chapter-mark" aria-hidden="true">11</div>
-      <div class="section-wrap">
-        <div class="text-center reveal" style="margin-bottom:48px;">
-          <p class="eyebrow"><span class="roman">— XI —</span><span class="sep"></span>FAQ</p>
-          <h2 style="margin-top:16px;font-size:clamp(22px,3vw,30px);font-weight:300;color:#1A1613;">よくある質問。</h2>
+    <!-- 11 / FAQ -->
+    <section id="faq" class="sec bg-paper2">
+      <div class="container faq-grid">
+        <div class="sec-head reveal">
+          <p class="label"><span class="no">11</span>FAQ</p>
+          <h2 class="sec-title">よくある質問。</h2>
+          <p class="sec-lead">ほかにも気になることがあれば、<br>お気軽にご相談ください。</p>
         </div>
-
-        <div style="max-width:720px;margin:0 auto;">
-
-          <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
-            <summary style="font-size:14px;font-weight:500;color:#1A1613;list-style:none;display:flex;justify-content:space-between;align-items:center;"><span><span style="color:#A87B4B;margin-right:12px;">Q.</span>独自ドメインは取れますか？</span><span style="color:#A87B4B;font-weight:300;">＋</span></summary>
-            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">はい、お持ちのドメイン or ご希望のドメインで公開可能です。取得・更新の費用（年間1,000〜2,000円程度）はお客様ご負担となります。<br>なお、独自ドメインを取らない場合でも、無料のサブドメインでそのままご利用いただけます（追加費用なし）。</p>
+        <div class="faq-list">
+          <details class="faq reveal">
+            <summary><span class="q">Q</span><span>独自ドメインは取れますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="a">はい、お持ちのドメイン or ご希望のドメインで公開可能です。取得・更新の費用（年間1,000〜2,000円程度）はお客様ご負担となります。<br>なお、独自ドメインを取らない場合でも、無料のサブドメインでそのままご利用いただけます（追加費用なし）。</p>
           </details>
-
-          <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
-            <summary style="font-size:14px;font-weight:500;color:#1A1613;list-style:none;display:flex;justify-content:space-between;align-items:center;"><span><span style="color:#A87B4B;margin-right:12px;">Q.</span>写真は自分で用意するの？</span><span style="color:#A87B4B;font-weight:300;">＋</span></summary>
-            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">はい、お店の雰囲気が伝わる写真をご用意いただきます。スマートフォンで撮ったもので十分です。撮影代行をご希望の場合は別途ご相談ください。</p>
+          <details class="faq reveal">
+            <summary><span class="q">Q</span><span>写真は自分で用意するの？</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="a">はい、お店の雰囲気が伝わる写真をご用意いただきます。スマートフォンで撮ったもので十分です。撮影代行をご希望の場合は別途ご相談ください。</p>
           </details>
-
-          <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
-            <summary style="font-size:14px;font-weight:500;color:#1A1613;list-style:none;display:flex;justify-content:space-between;align-items:center;"><span><span style="color:#A87B4B;margin-right:12px;">Q.</span>公開後の修正は？</span><span style="color:#A87B4B;font-weight:300;">＋</span></summary>
-            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">営業時間の変更、メニューの差し替え数点といった軽微な修正は、無償で随時対応します。大幅な構成変更は別途お見積もりとなります。</p>
+          <details class="faq reveal">
+            <summary><span class="q">Q</span><span>公開後の修正は？</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="a">営業時間の変更、メニューの差し替え数点といった軽微な修正は、無償で随時対応します。大幅な構成変更は別途お見積もりとなります。</p>
           </details>
-
-          <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
-            <summary style="font-size:14px;font-weight:500;color:#1A1613;list-style:none;display:flex;justify-content:space-between;align-items:center;"><span><span style="color:#A87B4B;margin-right:12px;">Q.</span>どれくらいで公開できますか？</span><span style="color:#A87B4B;font-weight:300;">＋</span></summary>
-            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">素材（写真・テキスト）をお預かりしてから、最短3日で公開できます。初稿をご確認いただき、調整を経て公開、という流れです。</p>
+          <details class="faq reveal">
+            <summary><span class="q">Q</span><span>どれくらいで公開できますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="a">素材（写真・テキスト）をお預かりしてから、最短3日で公開できます。初稿をご確認いただき、調整を経て公開、という流れです。</p>
           </details>
-
-          <details class="reveal" style="border-bottom:1px solid #D9CFBD;padding:20px 4px;cursor:pointer;">
-            <summary style="font-size:14px;font-weight:500;color:#1A1613;list-style:none;display:flex;justify-content:space-between;align-items:center;"><span><span style="color:#A87B4B;margin-right:12px;">Q.</span>大田区以外の店舗でも頼めますか？</span><span style="color:#A87B4B;font-weight:300;">＋</span></summary>
-            <p style="margin-top:16px;font-size:13px;color:#6B5A4E;line-height:2;">はい、ご相談いただけます。大田区サンポットのSNS連携PRは大田区限定ですが、HP制作のみであれば近隣エリアや他区の店舗様もお受けしています。</p>
+          <details class="faq reveal">
+            <summary><span class="q">Q</span><span>大田区以外の店舗でも頼めますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <p class="a">はい、ご相談いただけます。大田区サンポットのSNS連携PRは大田区限定ですが、HP制作のみであれば近隣エリアや他区の店舗様もお受けしています。</p>
           </details>
-
         </div>
       </div>
     </section>
 
-    <!-- SECTION 11 / CTA -->
-    <section id="contact" style="background:#1A1613;color:#fff;">
-      <div class="section-wrap text-center">
-        <p class="eyebrow reveal" style="color:#C9A063;"><span class="roman">— XII —</span><span class="sep"></span>CONTACT</p>
-
-        <h2 class="reveal" style="margin-top:24px;font-size:clamp(24px,4vw,38px);font-weight:300;color:#fff;">
-          まずは、<br>無料で相談してみませんか。
-        </h2>
-
-        <p class="reveal" style="margin-top:32px;font-size:14px;line-height:2;color:rgba(255,255,255,0.7);">
-          ご質問だけでも構いません。<br>1〜2営業日で、ご返信します。
-        </p>
-
-        <div class="reveal" style="margin-top:48px;">
-          <a href="https://forms.gle/8inimr7e3HsyYQD9A" target="_blank" rel="noopener noreferrer" class="btn-gold">
-            無料で相談する<span class="arrow-anim" aria-hidden="true">→</span>
-          </a>
+    <!-- 12 / CONTACT -->
+    <section id="contact" class="sec contact on-dark">
+      <div class="contact-bg" aria-hidden="true"></div>
+      <div class="container">
+        <p class="label reveal"><span class="no">12</span>CONTACT</p>
+        <h2 class="reveal d1">まずは、<br>無料で相談してみませんか。</h2>
+        <p class="lead reveal d2">ご質問だけでも構いません。<br>1〜2営業日で、ご返信します。</p>
+        <div class="reveal d3">
+          <a href="https://forms.gle/8inimr7e3HsyYQD9A" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-lg">無料で相談する<span class="arr" aria-hidden="true">→</span></a>
         </div>
-
-        <p class="reveal" style="margin-top:24px;font-size:11px;color:rgba(255,255,255,0.4);line-height:1.8;">ご相談は無料です。お断りいただいても問題ありません。</p>
+        <p class="fine reveal d4">ご相談は無料です。お断りいただいても問題ありません。</p>
       </div>
     </section>
   </main>
 
   <!-- === Footer === -->
   <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="brand-block">
-        <p class="brand-name">OTA SANPOT × SIMPLE BRANDING WEB FOR FOOD</p>
-        <p class="brand-tag">飲食店のための、1ページで完結するブランディング・ウェブ。</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo-wide-light.png" alt="Simple Branding Web for Food" width="480" height="232" loading="lazy">
+          <p class="brand-name">OTA SANPOT × SIMPLE BRANDING WEB FOR FOOD</p>
+          <p class="brand-tag">飲食店のための、1ページで完結するブランディング・ウェブ。</p>
+        </div>
+        <div>
+          <p class="index-label">INDEX</p>
+          <ul class="index-list">
+            <li><a href="#hero"><span class="num">01</span>HERO</a></li>
+            <li><a href="#showcase"><span class="num">02</span>SHOWCASE</a></li>
+            <li><a href="#pain"><span class="num">03</span>PAIN</a></li>
+            <li><a href="#concept"><span class="num">04</span>CONCEPT</a></li>
+            <li><a href="#value"><span class="num">05</span>VALUE</a></li>
+            <li><a href="#scope"><span class="num">06</span>SCOPE</a></li>
+            <li><a href="#usecases"><span class="num">07</span>USE CASES</a></li>
+            <li><a href="#comparison"><span class="num">08</span>COMPARISON</a></li>
+            <li><a href="#flow"><span class="num">09</span>FLOW</a></li>
+            <li><a href="#trust"><span class="num">10</span>TRUST</a></li>
+            <li><a href="#faq"><span class="num">11</span>FAQ</a></li>
+            <li><a href="#contact"><span class="num">12</span>CONTACT</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="index-block">
-        <p class="index-label">INDEX</p>
-        <ul class="index-list">
-          <li><a href="#hero"><span class="num">I</span>HERO</a></li>
-          <li><a href="#showcase"><span class="num">II</span>SHOWCASE</a></li>
-          <li><a href="#pain"><span class="num">III</span>PAIN</a></li>
-          <li><a href="#concept"><span class="num">IV</span>CONCEPT</a></li>
-          <li><a href="#value"><span class="num">V</span>VALUE</a></li>
-          <li><a href="#scope"><span class="num">VI</span>SCOPE</a></li>
-          <li><a href="#usecases"><span class="num">VII</span>USE CASES</a></li>
-          <li><a href="#comparison"><span class="num">VIII</span>COMPARISON</a></li>
-          <li><a href="#flow"><span class="num">IX</span>FLOW</a></li>
-          <li><a href="#trust"><span class="num">X</span>TRUST</a></li>
-          <li><a href="#faq"><span class="num">XI</span>FAQ</a></li>
-          <li><a href="#contact"><span class="num">XII</span>CONTACT</a></li>
-        </ul>
+      <div class="footer-meta">
+        <p>&copy; 大田区サンポット　Simple Homepage Service</p>
+        <p>
+          <a href="https://ota-sanpot.com/" target="_blank" rel="noopener">大田区サンポット</a>
+          　／
+          <a href="https://ota-sanpot.github.io/sns_consul/" target="_blank" rel="noopener">GURUMA（SNSコンサル）</a>
+        </p>
       </div>
-    </div>
-    <div class="footer-meta">
-      <p>&copy; 大田区サンポット　Simple Homepage Service</p>
-      <p>
-        <a href="https://ota-sanpot.com/" target="_blank" rel="noopener">大田区サンポット</a>
-        　／
-        <a href="https://ota-sanpot.github.io/sns_consul/" target="_blank" rel="noopener">GURUMA（SNSコンサル）</a>
-      </p>
     </div>
   </footer>
 
-  <script>
-    // スクロールリビール
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  <!-- スマホ用 固定相談ボタン -->
+  <div class="fab" id="fab">
+    <a href="#contact" class="btn btn-gold">無料で相談する<span class="arr" aria-hidden="true">→</span></a>
+  </div>
 
-    // スティッキーヘッダーの表示切替（ヒーロー通過後に出現）
+  <script>
+    // スクロールリビール（ヒーローは読み込み直後に立ち上げる）
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('visible')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
+      requestAnimationFrame(() => document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible')));
+    })();
+
+    // ヘッダーの背景・スマホ固定ボタンの表示切替
     (function(){
       const header = document.getElementById('siteHeader');
+      const fab = document.getElementById('fab');
       const hero = document.getElementById('hero');
-      if (!header || !hero) return;
-      let threshold = 0;
-      const recompute = () => {
-        const rect = hero.getBoundingClientRect();
-        threshold = (rect.top + window.scrollY) + hero.offsetHeight - 80;
-      };
-      recompute();
-      window.addEventListener('resize', recompute, { passive: true });
+      const contact = document.getElementById('contact');
       const onScroll = () => {
-        if (window.scrollY > threshold) header.classList.add('is-visible');
-        else header.classList.remove('is-visible');
+        const y = window.scrollY;
+        header.classList.toggle('is-scrolled', y > 24);
+        const pastHero = y > hero.offsetHeight * 0.7;
+        const nearContact = contact.getBoundingClientRect().top < window.innerHeight;
+        fab.classList.toggle('is-visible', pastHero && !nearContact);
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
     })();
 
-    // SHOWCASE プレビュー: 390px描画の iframe を枠幅に合わせて縮小
+    // モバイルメニュー
     (function(){
-      const BASE = 390;
-      function fitPreviews(){
-        document.querySelectorAll('.phone-bezel .phone-screen').forEach(screen => {
-          const iframe = screen.querySelector('iframe');
-          if (!iframe) return;
-          const scale = screen.clientWidth / BASE;
-          iframe.style.transform = 'scale(' + scale + ')';
-        });
-      }
-      window.addEventListener('resize', fitPreviews, { passive: true });
-      window.addEventListener('load', fitPreviews);
-      fitPreviews();
+      const btn = document.getElementById('menuBtn');
+      const nav = document.getElementById('mobileNav');
+      const setOpen = (open) => {
+        document.body.classList.toggle('menu-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      };
+      btn.addEventListener('click', () => setOpen(!document.body.classList.contains('menu-open')));
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
     })();
   </script>
 
