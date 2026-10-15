@@ -3,11 +3,11 @@
 飲食店のための、1ページで完結する **ブランディング・ウェブ**。
 制作費 ¥25,000・月額 ¥0 で「お店のデジタル看板」を作るサービスの公式LP。
 
-- 公開URL: https://ota-sanpot.github.io/simple-hp/
+- 公開URL: https://hp.ota-sanpot.com/
 - 通称（商品名）: シンプルホームページ制作
 - 設計書: `../../docs/superpowers/specs/2026-05-29-simple-hp-lp-design.md`
 - 実装プラン: `../../docs/superpowers/plans/2026-05-29-simple-hp-lp.md`
-- 親サービス（GURUMA・SNSコンサル）: https://ota-sanpot.github.io/sns_consul/
+- 親サービス（GURUMA・SNSコンサル）: https://guruma.ota-sanpot.com/
 - 親メディア（大田区サンポット）: https://ota-sanpot.com/
 
 ## ローカルプレビュー
